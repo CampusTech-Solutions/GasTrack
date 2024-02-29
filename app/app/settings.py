@@ -34,9 +34,9 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'daphne',
-    'channels',
-    'channels_redis',
+    'daphne', # pour les websockets
+    'channels', # pour les websockets
+    'channels_redis', # pour les websockets
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,8 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.gis',
     'rest_framework',
-    'rest_framework_gis',
-    'leaflet',
+    'rest_framework_gis', # prends en consideration la geolocalisation
+    'leaflet', # package for map views
     "rest_framework.authtoken",
     'corsheaders',
     'django_filters',
@@ -100,7 +100,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'gaztrack',
-        'USER': 'postgres',
+        'USER': 'gaztrack',
         'PASSWORD': 'postgres',
         'HOST': '127.0.0.1',
         'PORT': '5432',
