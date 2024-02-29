@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import environ
+#from . import ip_address
+
 
 
 
@@ -34,9 +36,9 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'daphne',
-    'channels',
-    'channels_redis',
+    'daphne', # pour les websockets
+    'channels', # pour les websockets
+    'channels_redis', # pour les websockets
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,11 +47,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.gis',
     'rest_framework',
-    'rest_framework_gis',
-    'leaflet',
+    'rest_framework_gis', # prends en consideration la geolocalisation
+    'leaflet', # package for map views
     "rest_framework.authtoken",
     'corsheaders',
     'django_filters',
+    'faker',
+    'accounts'
     
 ]
 
@@ -100,7 +104,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'gaztrack',
-        'USER': 'postgres',
+        'USER': 'gaztrack',
         'PASSWORD': 'postgres',
         'HOST': '127.0.0.1',
         'PORT': '5432',
@@ -145,7 +149,7 @@ REST_FRAMEWORK = {
    'DEFAULT_AUTHENTICATION_CLASSES': (
         #'rest_framework.authentication.BasicAuthentication',
        'rest_framework.authentication.SessionAuthentication',
-       #'rest_framework.authentication.TokenAuthentication',
+       'rest_framework.authentication.TokenAuthentication',
    ),
    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
    
@@ -186,7 +190,7 @@ GEOIP_PATH = os.path.join(BASE_DIR,'geoip')
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
-#AUTH_USER_MODEL = "accounts.User"
+AUTH_USER_MODEL = "accounts.Client"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
@@ -206,8 +210,9 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'manuelsokoudjou@gmail.com'
 EMAIL_HOST_PASSWORD = 'oaygyzuvrvvnxfop'
 
+
 LEAFLET_CONFIG = {
-    "DEFAULT_CENTER": (-1.94, 29.87),
+    "DEFAULT_CENTER": (7.3696495,12.3445856),
     "DEFAULT_ZOOM": 8,
     "MAX_ZOOM": 20,
     "MIN_ZOOM": 3,
