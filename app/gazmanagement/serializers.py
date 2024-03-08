@@ -1,10 +1,10 @@
 from .models import *
-# from accounts.serializers import GasStoreSerializer
+from accounts.serializers import GestStoreSerializer
 from rest_framework import serializers
 from rest_framework_gis.serializers import GeoModelSerializer
 
 class GasStoreSerializer(GeoModelSerializer):
-    # manager = GestStoreSerializer()
+    manager = GestStoreSerializer()
     class Meta:
         model = GasStore
         geo_field = 'location'
