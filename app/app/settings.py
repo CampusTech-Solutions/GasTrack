@@ -53,8 +53,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'faker',
-    'accounts'
-    
+    'accounts',
+    'commands'
 ]
 
 MIDDLEWARE = [
