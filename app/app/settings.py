@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'faker',
     'accounts',
     'gazmanagement',
-    
+    'commands'
 ]
 
 MIDDLEWARE = [

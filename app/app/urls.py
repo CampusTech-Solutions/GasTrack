@@ -22,6 +22,7 @@ from django.conf import settings
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/",include("accounts.urls")),
+    path("commands/", include("commands.urls")),
     path("gasmanagement/",include("gazmanagement.urls")),
 ]
 

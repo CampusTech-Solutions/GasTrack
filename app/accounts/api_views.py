@@ -120,7 +120,6 @@ class BaseClientViewSet(viewsets.ModelViewSet):
             users = self.model.objects.all().exclude(id=request.user.id)
             
             users.delete()
-       
         
         return Response(status=status.HTTP_200_OK)
 
