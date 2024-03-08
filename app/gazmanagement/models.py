@@ -35,7 +35,7 @@ class GasBrand(models.Model):
 """Modèle d'une bouteille à gaz"""
 
 class GasBottle(models.Model):
-    brand = models.ForeignKey(GasBrand, on_delete=models.CASCADE, null=True)
+    brand = models.ForeignKey(GasBrand, on_delete=models.CASCADE)
     image = models.FileField(upload_to="gasmanagement/gasbottles/", default="gasmanagement/gasbottles/default.png")
     weight = models.FloatField(default=0.0, null=False, blank=False)
     price = models.FloatField(default=0.0, null=False, blank=False)

@@ -8,6 +8,7 @@ class Client(AbstractUser):
     no_cni = models.CharField(max_length=255, unique=True,null=True)
     phone_No = models.CharField(max_length=50)
     location = models.PointField(srid=4326, null=True)
+    code = models.CharField(max_length=16,unique=True,null=True)
     
     def __str__(self) -> str:
         return self.username
