@@ -8,6 +8,9 @@ class Basket(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='client_basket')
     gasStore = models.ForeignKey(GasStore, on_delete=models.CASCADE, related_name='basket')
 
+    def __str__(self) -> str:
+        return f"[ Basket ] client : {self.client.username} | Gas Store : {self.gasStore.name}"
+
 
 # Modèle pour créer une table commande
 class Command(models.Model):
