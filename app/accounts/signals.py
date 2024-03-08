@@ -7,7 +7,13 @@ from rest_framework.authtoken.models import Token
 
 
 @receiver(post_save, sender=Client)
-def create_auth_token(sender, instance=None, created=False, **kwargs):
+def create_client_auth_token(sender, instance=None, created=False, **kwargs):
+    
+    if created:
+        Token.objects.create(user=instance)
+
+@receiver(post_save, sender=GestStore)
+def create_gest_auth_token(sender, instance=None, created=False, **kwargs):
     
     if created:
         Token.objects.create(user=instance)
