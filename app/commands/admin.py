@@ -7,6 +7,9 @@ class CommandAdmin(admin.ModelAdmin):
 class PayCommandAdmin(admin.ModelAdmin):
     model = PayCommand
 
+class BasketAdmin(admin.ModelAdmin):
+    model = Basket
 
 admin.site.register(Command, CommandAdmin)
 admin.site.register(PayCommand, PayCommandAdmin)
+admin.site.register(Basket, BasketAdmin)

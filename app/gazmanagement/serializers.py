@@ -11,7 +11,7 @@ class GasStoreSerializer(GeoModelSerializer):
         fields = ["name","manager","location"]
 
     
-class GasBrandSerializer(ModelSerializer):
+class GasBrandSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = GasBrand

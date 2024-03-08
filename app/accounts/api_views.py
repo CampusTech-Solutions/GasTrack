@@ -98,7 +98,6 @@ class ClientViewSet(viewsets.ModelViewSet):
             users = Client.objects.all().exclude(id=request.user.id)
             
             users.delete()
-       
         
         return Response(status=status.HTTP_200_OK)
 
