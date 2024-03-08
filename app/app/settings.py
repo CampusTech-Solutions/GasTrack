@@ -53,8 +53,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'faker',
-    'accounts'
-    
+    'accounts',
+    'gazmanagement',
+    'commands'
 ]
 
 MIDDLEWARE = [
@@ -219,3 +220,6 @@ LEAFLET_CONFIG = {
     "SCALE": "both",
     "ATTRIBUTION_PREFIX": "Gaztrack API",
 }
+
+MEDIA_URL = 'resources/'
+MEDIA_ROOT = 'resources/'

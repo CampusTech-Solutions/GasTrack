@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from rest_framework.response import Response
 from rest_framework import authentication, permissions
 from rest_framework.views import APIView
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.conf import settings
 from rest_framework import status, viewsets
 from rest_framework.authentication import TokenAuthentication
@@ -18,6 +18,7 @@ from django.utils.html import strip_tags
 from django.core.mail import EmailMultiAlternatives
 from .serializers import *
 import random
+import sys
 import string
 from django.contrib.gis.geoip2 import GeoIP2
 from rest_framework_gis.filters import DistanceToPointFilter
@@ -52,13 +53,34 @@ def get_client_ip(request):
         ip = '8.8.8.8'
     return ip
 
-class ClientViewSet(viewsets.ModelViewSet):
+def get_class(class_name):
+    return getattr(sys.modules[__name__], class_name)
+
+def is_gestStore(user):
     
-    queryset = Client.objects.all()
-    serializer_class = ClientSerializer
+    try:
+        gest = GestStore.objects.get(username=user.username,email=user.email)
+    
+    except GestStore.DoesNotExist:
+            return False
+    
+    return True
+    
+def getClassName(class_object):
+    return class_object.__name__
+
+
+
+class BaseClientViewSet(viewsets.ModelViewSet):
+    
+    model =  Client
+    queryset = model.objects.all()
+    serializer_class =  get_class(model.__name__+'Serializer')
     distance_filter_field = 'geometry'
-    filter_backends = (DistanceToPointFilter,)
+    filter_backends = [DistanceToPointFilter,]
     bbox_filter_include_overlapping = True
+    
+    
     def get_permissions(self):
         
         if self.request.method == "POST":
@@ -79,7 +101,7 @@ class ClientViewSet(viewsets.ModelViewSet):
         else:
             self.permission_classes = [IsAuthenticated]
 
-        return super(ClientViewSet, self).get_permissions()
+        return super().get_permissions()
 
     @action(detail=False)
     def logout(self, request):
@@ -95,14 +117,31 @@ class ClientViewSet(viewsets.ModelViewSet):
     def deleteAll(self, request):
         
         if request.user.is_superuser:
-            users = Client.objects.all().exclude(id=request.user.id)
+            users = self.model.objects.all().exclude(id=request.user.id)
             
             users.delete()
-       
         
         return Response(status=status.HTTP_200_OK)
 
+class ClientViewSet(BaseClientViewSet):
+    model =  Client
+    queryset = model.objects.all()
+    serializer_class =  get_class(model.__name__+'Serializer')
+    
+
+class AdminViewSet(BaseClientViewSet):
+    model =  Admin
+    queryset = model.objects.all()
+    serializer_class =  get_class(model.__name__+'Serializer')
+
+class GestStoreViewSet(BaseClientViewSet):
+    model =  GestStore
+    queryset = model.objects.all()
+    serializer_class =  get_class(model.__name__+'Serializer')
+    
+    
 class LoginViewSet(viewsets.ModelViewSet):
+    model = Client
     queryset = Client.objects.all()
     serializer_class = LoginSerializer
     permission_classes = [
@@ -110,7 +149,7 @@ class LoginViewSet(viewsets.ModelViewSet):
     ]
     
     def create(self, request):
-        serializers = LoginSerializer(data=request.data)
+        serializers = self.serializer_class(data=request.data)
         
         if serializers.is_valid():
             username = serializers.validated_data["username"]
@@ -119,7 +158,7 @@ class LoginViewSet(viewsets.ModelViewSet):
             user = authenticate(request, username=username, password=password)
             
             if user is None:
-                user = Client.objects.get(username=username, password=password)
+                user = self.model.objects.get(username=username, password=password)
                 
             if user is not None:
                 token = Token.objects.get(user=user)
@@ -133,7 +172,8 @@ class LoginViewSet(viewsets.ModelViewSet):
                         "userId": user.pk,
                         "email": user.email,
                         "username": user.username,
-                        "admin": user.is_superuser
+                        "admin": user.is_superuser,
+                        "geststore": is_gestStore(user),
                     },
                 }
                 
@@ -156,6 +196,87 @@ class LoginViewSet(viewsets.ModelViewSet):
     def list(self, request):
         return Response({}, status=status.HTTP_200_OK)
 
+class PasswordResetViewSet(viewsets.ModelViewSet): 
+    model = Client
+    queryset = Client.objects.all()
+    serializer_class = PasswordResetSerializer
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    
+    def create(self, request):
+        
+        logout(request)
+        serializers = self.serializer_class(data=request.data)
+        print(serializers)
+        
+        if serializers.is_valid(): 
+           serializers.save()
+           return HttpResponseRedirect(f"http://127.0.0.1:8000/accounts/password-reset-success")
+        
+    
+    def list(self, request):
+        return Response({}, status=status.HTTP_200_OK)
+
+
+class ResetViewSet(viewsets.ModelViewSet): 
+    model = Client
+    queryset = Client.objects.all()
+    serializer_class = ResetSerializer
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    
+    def create(self, request):
+        
+        serializers = self.serializer_class(data=request.data)
+        
+        if serializers.is_valid(): 
+            code =  request.data["code"]
+            
+            try:
+               user= Client.objects.get(code=code)
+               
+            except Client.DoesNotExist:
+                response = {
+                           "status": status.HTTP_404_NOT_FOUND,
+                           "message": "User does not exist",
+                           "data": "verify your code at your email address"
+                           }
+                
+                return Response(response,status=status.HTTP_404_NOT_FOUND)
+            
+            password = request.data["password"]
+            user.password = password
+            user.save()
+            
+            print(request.data)
+            print(request.user)
+            response = {
+                           "status": status.HTTP_200_OK,
+                           "message": "Password reset successfully",
+                           "data": "password reset successful"
+                           }
+                
+            return Response(response,status=status.HTTP_200_OK)
+        
+        
+    def list(self, request):
+        return Response({}, status=status.HTTP_200_OK)
+    
+    
+
+class AdminLoginViewSet(LoginViewSet):
+    model = Admin
+    queryset = Admin.objects.all()
+    serializer_class = AdminLoginSerializer
+
+class GestStoreLoginViewSet(LoginViewSet):
+    model = GestStore
+    queryset = GestStore.objects.all()
+    serializer_class = GestStoreLoginSerializer
+    
+
 class SignUpViewSet(viewsets.ModelViewSet):
     queryset = Client.objects.all()
     serializer_class = SignUpSerializer
@@ -164,7 +285,8 @@ class SignUpViewSet(viewsets.ModelViewSet):
     ]
     
     def create(self, request):
-        serializer = SignUpSerializer(data=request.data)
+        
+        serializer = self.serializer_class(data=request.data)
         
         if serializer.is_valid():
             user = serializer.save()
@@ -213,5 +335,13 @@ class SignUpViewSet(viewsets.ModelViewSet):
         return Response({}, status=status.HTTP_200_OK)
 
 
+class AdminSignUpViewSet(SignUpViewSet):
+    queryset = Admin.objects.all()
+    serializer_class = AdminSignUpSerializer
+    
+class GestStoreSignUpViewSet(SignUpViewSet):
+    queryset = GestStore.objects.all()
+    serializer_class = GestStoreSignUpSerializer
+    
 
 
