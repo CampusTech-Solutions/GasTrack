@@ -10,6 +10,7 @@ class GasStore(models.Model):
     name = models.CharField(max_length=255, null=False, unique=True)
     manager = models.ForeignKey(GestStore, on_delete=models.CASCADE)
     location = models.PointField(srid=4326, null=True)
+    image = models.ImageField(upload_to="gasmanagement/gasstores/", default="gasmanagement/gasstores/default.png")
 
     created_at = models.DateTimeField(auto_now_add=True, null=True)
 
@@ -36,7 +37,7 @@ class GasBrand(models.Model):
 
 class GasBottle(models.Model):
     brand = models.ForeignKey(GasBrand, on_delete=models.CASCADE)
-    image = models.FileField(upload_to="gasmanagement/gasbottles/", default="gasmanagement/gasbottles/default.png")
+    image = models.ImageField(upload_to="gasmanagement/gasbottles/", default="gasmanagement/gasbottles/default.png")
     weight = models.FloatField(default=0.0, null=False, blank=False)
     price = models.FloatField(default=0.0, null=False, blank=False)
 
