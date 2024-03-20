@@ -4,19 +4,19 @@ from  gazmanagement.models import GasStore, GasBottle
 
 # Modèle qour créer les paniers
 # Un panier est spécifique à un client pour un dépot particulier
-class Basket(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='client_basket')
-    gasStore = models.ForeignKey(GasStore, on_delete=models.CASCADE, related_name='basket')
+class Cart(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='client_cart')
+    gasStore = models.ForeignKey(GasStore, on_delete=models.CASCADE, related_name='cart')
 
     def __str__(self) -> str:
-        return f"[ Basket ] client : {self.client.username} | Gas Store : {self.gasStore.name}"
+        return f"[ Cart ] client : {self.client.username} | Gas Store : {self.gasStore.name}"
 
 
 # Modèle pour créer une table commande
 class Command(models.Model):
     gasBottle = models.ForeignKey(GasBottle, on_delete=models.CASCADE, related_name="command_gasbottle")
     bottleNumber = models.IntegerField()
-    basket = models.ForeignKey(Basket, on_delete=models.CASCADE, related_name="command_basket")
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="command_cart")
 
     def __str__(self):
         return f"bottle : {self.gasBottle}, number : {self.bottleNumber}"
