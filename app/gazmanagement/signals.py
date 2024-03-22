@@ -5,9 +5,21 @@ from django.conf import settings
 from .models import *
 
 
-@receiver(post_save, sender=GasStore)
-def create_stock(sender, instance=None, **kwargs):
-    Stock.objects.create(store=instance)
+
+@receiver(pre_save, sender=StockGasBottle)
+def update_stock(sender, instance=None, **kwargs):
+    try:
+        previous_stock = StockGasBottle.objects.get(id=instance.id)
+        new_qty = instance.quantity - previous_stock.quantity
+    except:
+        new_qty = instance.quantity
+
+    stock = instance.stock
+    stock.total_bottles += new_qty
+    stock.value += instance.bottle.price*new_qty
+    stock.updated_at = timezone.now()
+    stock.save()
+
 
 @receiver(pre_delete, sender=GasStore)
 def delete_stock(sender, instance=None, **kwargs):

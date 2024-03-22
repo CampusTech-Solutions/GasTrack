@@ -37,6 +37,12 @@ urlpatterns += [
     path('stockgasbottle/update/<int:id>/', StockGasBottleViewSet.as_view({'patch': 'partial_update'}), name='stockgasbottle-update'),
     path('stockgasbottle/delete/<int:id>/', StockGasBottleViewSet.as_view({'delete': 'destroy'}), name='stockgasbottle-destroy'),
 
+    path('stock/', StockViewSet.as_view({'get': 'list'}), name='stock-list'),
+    path('stock/new/', StockViewSet.as_view({'post': 'create'}), name='stock-create'),
+    path('stock/<int:id>/', StockViewSet.as_view({'get': 'retrieve'}), name='stock-retrieve'),
+    path('stock/update/<int:id>/', StockViewSet.as_view({'patch': 'partial_update'}), name='stock-update'),
+    path('stock/delete/<int:id>/', StockViewSet.as_view({'delete': 'destroy'}), name='stock-destroy'),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -177,7 +177,6 @@ class GasBrandConsumer(AsyncWebsocketConsumer):
             )
         elif  action == "update":
             msg = await self.update_gas_brand(message)
-            # print(f"gasbrand : {msg}")
             await self.channel_layer.group_send(
                 self.group_name,
                 {"type": "send.data", "data": msg}
@@ -223,37 +222,7 @@ class StockGasBottleConsumer(AsyncWebsocketConsumer):
     permission_classes = [IsAuthenticated,]
     groups = ['stockgasbottle']
 
-    async def connect(self):
-        self.group_name = 'stockgasbottle'
-        await self.accept()
-
-    async def disconnect(self, close_code):
-        await self.channel_layer.group_discard(self.group_name, self.channel_name)
-
-    async def receive(self, text_data):
-        data = json.loads(text_data)
-        message = data.get('message')
-        action = data.get('action')
-
-        if action == "create":
-            stockgasbottle_data = await self.create_or_update_gas_brand(message)
-            await self.channel_layer.group_send(
-                self.group_name,
-                {"type": "send.data", "data": stockgasbottle_data}
-            )
-        elif action == "delete":
-            msg = await self.delete_gas_brand(message)
-            await self.channel_layer.group_send(
-                self.group_name,
-                {"type": "send.data", "data": msg}
-            )
-        elif  action == "update":
-            id = message.pop("id")
-            msg = await self.update_gas_brand(message, id)
-            await self.channel_layer.group_send(
-                self.group_name,
-                {"type": "send.data", "data": msg}
-            )
+    
     async def connect(self):
         self.group_name = 'stockgasbottle'
         await self.accept()
@@ -288,9 +257,7 @@ class StockGasBottleConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def create_stock_gas_bottle(self, message):
         try:
-            gasstore = GasStore.objects.get(id=message.pop("store"))
-            stock = gasstore.getStock()
-            stockgasbottle = StockGasBottle.objects.create(bottle_id=message.pop("bottle"), stock_id=stock.id, **message)
+            stockgasbottle = StockGasBottle.objects.create(bottle_id=message.pop("bottle"), stock_id=message.pop("stock"), **message)
             stockgasbottle_data = StockGasBottleSerializer(stockgasbottle)
             return stockgasbottle_data.data
         except:
@@ -323,3 +290,73 @@ class StockGasBottleConsumer(AsyncWebsocketConsumer):
         await self.send(text_data=json.dumps(stockgasbottle_data))
 
 
+class StockConsumer(AsyncWebsocketConsumer):
+    permission_classes = [IsAuthenticated,]
+    groups = ['stock']
+
+    
+    async def connect(self):
+        self.group_name = 'stock'
+        await self.accept()
+
+    async def disconnect(self, close_code):
+        await self.channel_layer.group_discard(self.group_name, self.channel_name)
+
+    async def receive(self, text_data):
+        data = json.loads(text_data)
+        message = data.get('message')
+        action = data.get('action')
+
+        if action == "create":
+            stock_data = await self.create_stock(message)
+            await self.channel_layer.group_send(
+                self.group_name,
+                {"type": "send.data", "data": stock_data}
+            )
+        elif action == "delete":
+            msg = await self.delete_stock(message)
+            await self.channel_layer.group_send(
+                self.group_name,
+                {"type": "send.data", "data": msg}
+            )
+        elif  action == "update":
+            msg = await self.update_stock(message)
+            await self.channel_layer.group_send(
+                self.group_name,
+                {"type": "send.data", "data": msg}
+            )
+
+    @database_sync_to_async
+    def create_stock(self, message):
+        try:
+            stock = Stock.objects.create(store_id=message.pop("store"), **message)
+            stock_data = StockSerializer(stock)
+            return stock_data.data
+        except:
+            return {"error": "error creating gas bottle's stock..."}
+    
+    @database_sync_to_async
+    def update_stock(self, message):
+        try:
+            id = message.pop("id")
+            Bool = Stock.objects.filter(id=id).update(**message)
+            stock = Stock.objects.get(id=id)
+            stock_data = StockSerializer(stock)
+            return stock_data.data
+        except:
+            return {"error": "error updating gas bottle's stock..."}
+
+    @database_sync_to_async
+    def delete_stock(self, message):
+        try:
+            if isinstance(message, int):
+                Stock.objects.get(id=message).delete()
+            else:
+                Stock.objects.filter(id__in=message).delete()
+            return {"message":"deletion successful !"}
+        except Exception as e:
+            return {"error":"error deleting gas bottle's stock..."}
+
+    async def send_data(self, event):
+        stock_data = event["data"]
+        await self.send(text_data=json.dumps(stock_data))

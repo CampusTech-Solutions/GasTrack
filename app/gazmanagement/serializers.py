@@ -11,6 +11,11 @@ class GasStoreSerializer(GeoModelSerializer):
         auto_bbox = True
         fields = ["id", "name","manager","location", "image"]
 
+class StockSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Stock
+        fields = ["id", "name","label","total_bottles", "value"]
+
 
 class GasBrandSerializer(serializers.ModelSerializer):
 

@@ -58,6 +58,16 @@ class StockViewSet(viewsets.ModelViewSet):
     serializer_class = StockSerializer
     queryset = Stock.objects.all()
 
+    def create(self, request, *args, **kwargs):
+        try:
+            stock = Stock.objects.create(store_id= request.data.pop("store"), **request.data)
+        except Exception as error:
+            return JsonResponse({"error": str(error)}, status=500)
+
+        stock_slz = StockSerializer(stock)
+
+        return JsonResponse({"data" : stock_slz.data}, status=201)
+
 
 class StockGasBottleViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
@@ -67,8 +77,7 @@ class StockGasBottleViewSet(viewsets.ModelViewSet):
 
     def create(self, request, **args):
         bottle = GasBottle.objects.get(id=request.data.pop("bottle"))
-        store = GasStore.objects.get(id=request.data.pop("store"))
-        stock = store.getStock()
+        stock = Stock.objects.get(id=request.data.pop("stock"))
 
         try:
             element = StockGasBottle.objects.create(bottle= bottle, stock= stock, **request.data)

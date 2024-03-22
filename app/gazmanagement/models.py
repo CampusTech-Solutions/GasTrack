@@ -14,9 +14,6 @@ class GasStore(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, null=True)
 
-    def getStock(self):
-        return Stock.objects.get(store=self)
-
     def __str__(self) -> str:
         return f"Gas Store : {self.name}"
 
@@ -65,6 +62,10 @@ class GasBottle(models.Model):
 
 class Stock(models.Model):
     store = models.ForeignKey(GasStore, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, null=False, unique=True)
+    label = models.CharField(max_length=255, default="Aucun")
+    total_bottles = models.IntegerField(default=0)
+    value = models.FloatField(default=0.0)
 
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(blank=True, null=True)
