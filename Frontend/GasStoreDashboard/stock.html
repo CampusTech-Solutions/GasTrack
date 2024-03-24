@@ -19,7 +19,7 @@
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/newstyles.css">
+    <link rel="stylesheet" href="newstyles.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="assets/images/favicon.png" />
     <style>
@@ -54,6 +54,8 @@
       #cards-container .col-sm-3{
         width: 50%;
       }
+
+      
 
     </style>
   </head>
@@ -199,6 +201,16 @@
       
                 </div>
               </li>
+              <form action="" class="nav-item" style="width: 30%; margin: 0em 1em;" >
+                <label class="switch" for="toggle">
+                  <input type="checkbox" id="toggle" name="toggle">
+                  <span class="switch"></span>
+                </label>
+                <div class="d-flex">
+                <i class="icon-lg mdi mdi-play text-small text-success ms-auto" id="switch-mdi"></i>
+                <span id="oc" style="font-size: 0.7em;">Ouvert</span>
+                </div>
+              </form>
              
            
               <li class="nav-item dropdown border-left">
@@ -285,181 +297,74 @@
             <div class="row" id="main-row">
               <div class="" id="sub-row-1">
                 <div class="d-flex" id="cards-container">
-                  <div class="col-sm-3 grid-margin">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5>Revenue</h5>
-                        <div class="row">
-                          <div class="col-16 col-sm-12 col-xl-8 my-auto">
-                            <div class="d-flex d-sm-block d-md-flex align-items-center">
-                              <h2 class="mb-0">$32123</h2>
-                              <p class="text-success ms-2 mb-0 font-weight-medium">+3.5%</p>
-                            </div>
-                            <h6 class="text-muted font-weight-normal">11.38% Since last month</h6>
-                          </div>
-                          <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
-                            <i class="icon-lg mdi mdi-codepen text-primary ms-auto"></i>
-                            <a href="#tkt"> click here</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3 grid-margin">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5>Revenue</h5>
-                        <div class="row">
-                          <div class="col-16 col-sm-12 col-xl-8 my-auto">
-                            <div class="d-flex d-sm-block d-md-flex align-items-center">
-                              <h2 class="mb-0">$32123</h2>
-                              <p class="text-success ms-2 mb-0 font-weight-medium">+3.5%</p>
-                            </div>
-                            <h6 class="text-muted font-weight-normal">11.38% Since last month</h6>
-                          </div>
-                          <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
-                            <i class="icon-lg mdi mdi-codepen text-primary ms-auto"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3 grid-margin">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5>Sales</h5>
-                        <div class="row">
-                          <div class="col-8 col-sm-12 col-xl-8 my-auto">
-                            <div class="d-flex d-sm-block d-md-flex align-items-center">
-                              <h2 class="mb-0">$45850</h2>
-                              <p class="text-success ms-2 mb-0 font-weight-medium">+8.3%</p>
-                            </div>
-                            <h6 class="text-muted font-weight-normal"> 9.61% Since last month</h6>
-                          </div>
-                          <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
-                            <i class="icon-lg mdi mdi-wallet-travel text-danger ms-auto"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3 grid-margin">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5>Purchase</h5>
-                        <div class="row">
-                          <div class="col-8 col-sm-12 col-xl-8 my-auto">
-                            <div class="d-flex d-sm-block d-md-flex align-items-center">
-                              <h2 class="mb-0">$2039</h2>
-                              <p class="text-danger ms-2 mb-0 font-weight-medium">-2.1% </p>
-                            </div>
-                            <h6 class="text-muted font-weight-normal">2.27% Since last month</h6>
-                          </div>
-                          <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
-                            <i class="icon-lg mdi mdi-monitor text-success ms-auto"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3 grid-margin">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5>Purchase</h5>
-                        <div class="row">
-                          <div class="col-8 col-sm-12 col-xl-8 my-auto">
-                            <div class="d-flex d-sm-block d-md-flex align-items-center">
-                              <h2 class="mb-0">$2039</h2>
-                              <p class="text-danger ms-2 mb-0 font-weight-medium">-2.1% </p>
-                            </div>
-                            <h6 class="text-muted font-weight-normal">2.27% Since last month</h6>
-                          </div>
-                          <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
-                            <i class="icon-lg mdi mdi-monitor text-success ms-auto"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3 grid-margin">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5>Purchase</h5>
-                        <div class="row">
-                          <div class="col-8 col-sm-12 col-xl-8 my-auto">
-                            <div class="d-flex d-sm-block d-md-flex align-items-center">
-                              <h2 class="mb-0">$2039</h2>
-                              <p class="text-danger ms-2 mb-0 font-weight-medium">-2.1% </p>
-                            </div>
-                            <h6 class="text-muted font-weight-normal">2.27% Since last month</h6>
-                          </div>
-                          <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
-                            <i class="icon-lg mdi mdi-monitor text-success ms-auto"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3 grid-margin">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5>Purchase</h5>
-                        <div class="row">
-                          <div class="col-8 col-sm-12 col-xl-8 my-auto">
-                            <div class="d-flex d-sm-block d-md-flex align-items-center">
-                              <h2 class="mb-0">$2039</h2>
-                              <p class="text-danger ms-2 mb-0 font-weight-medium">-2.1% </p>
-                            </div>
-                            <h6 class="text-muted font-weight-normal">2.27% Since last month</h6>
-                          </div>
-                          <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
-                            <i class="icon-lg mdi mdi-monitor text-success ms-auto"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3 grid-margin">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5>Purchase</h5>
-                        <div class="row">
-                          <div class="col-8 col-sm-12 col-xl-8 my-auto">
-                            <div class="d-flex d-sm-block d-md-flex align-items-center">
-                              <h2 class="mb-0">$2039</h2>
-                              <p class="text-danger ms-2 mb-0 font-weight-medium">-2.1% </p>
-                            </div>
-                            <h6 class="text-muted font-weight-normal">2.27% Since last month</h6>
-                          </div>
-                          <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
-                            <i class="icon-lg mdi mdi-monitor text-success ms-auto"></i>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
               <div class="" id="tkt">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Stock General</h4>
-                    <div class="text-center">
-                      <img height="200px" src="assets/images/b7.png" alt="gas" />
+                    <div style="display: flex;">
+                      <i class="icon-lg mdi mdi-menu-left text-grey ms-auto d-block" style="margin-left: 0em !important;" onclick="ScrollTo('sub-row-1')"></i>
+                      <h4 class="card-title" id="new-card-title" style="align-self: center; font-size: 2em;">Title</h4>
                     </div>
-                   
-                    <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
-                      <div class="text-md-center text-xl-left">
-                        <h6 class="mb-1">Stock Total </h6>
-                        <p class="text-muted mb-0">07 Jan 2019, 09:12AM</p>
-                      </div>
-                      <div class="align-self-center flex-grow text-right text-md-center text-xl-right py-md-2 py-xl-0">
-                        <h6 class="font-weight-bold mb-0">236</h6>
-                      </div>
+                    <div class="form-containers" id="form-stock-container">
+                      <form action="" class="data-forms" id="stock-form">
+                        <div class="form-title" id="">Créer Un Stock</div>
+                        <div class="form-stock-labels" for="stock-name">
+                          <input type="text" id="stock-name" name="stock-name" placeholder="Nom du Stock">
+                          <span class="form-stock-labels"></span>
+                        </div>
+                        <div class="form-stock-labels" for="stock-label">
+                          <input type="text" id="stock-label" name="stock-label" placeholder="Libelé">
+                          <span class="form-stock-labels"></span>
+                        </div>
+                        <div class="form-stock-labels" for="stock-submit">
+                          <input type="submit" id="stock-submit" name="stock-submit" value="Enregistrer">
+                        </div>
+                      </form>
+                      <form action="" class="data-forms" id="stock-form-2" >
+                        <div class="form-title" id="">Stock Enregistrés</div>
+                        <div class="" id="stock-list-container">
+                          <div class="col-sm-7 d-flex" id="stock-list-1" onclick="">
+                            <div class="col-5 col-sm-3 col-xl-5 my-auto" style="width: 70%;">
+                              <div class="">
+                                <h4 class="">Nom stock</h4>
+                              </div>
+                              <h6 class="text-muted font-weight-normal">Libelé</h6>
+                            </div>
+                            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right d-flex" style="margin-right: 1em;">
+                              <i class="icon-lg mdi mdi-update text-primary text-big ms-auto" style="font-size: 2em; margin-top: 0.35em; margin-right: 1em;"></i>
+                              <i class="icon-lg mdi mdi-delete text-danger text-big ms-auto" style="font-size: 2em; margin-top: 0.35em; margin-right: 1em;"></i>
+                            </div>
+                          </div>
+                          <div class="col-sm-7 d-flex" id="stock-list-1" onclick="">
+                            <div class="col-5 col-sm-3 col-xl-5 my-auto" style="width: 70%;">
+                              <div class="">
+                                <h4 class="">Nom stock</h4>
+                              </div>
+                              <h6 class="text-muted font-weight-normal">Libelé</h6>
+                            </div>
+                            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right d-flex" style="margin-right: 1em;">
+                              <i class="icon-lg mdi mdi-update text-primary text-big ms-auto" style="font-size: 2em; margin-top: 0.35em; margin-right: 1em;"></i>
+                              <i class="icon-lg mdi mdi-delete text-danger text-big ms-auto" style="font-size: 2em; margin-top: 0.35em; margin-right: 1em;"></i>
+                            </div>
+                          </div>
+                          <div class="col-sm-7 d-flex" id="stock-list-1" onclick="">
+                            <div class="col-5 col-sm-3 col-xl-5 my-auto" style="width: 70%;">
+                              <div class="">
+                                <h4 class="">Nom stock</h4>
+                              </div>
+                              <h6 class="text-muted font-weight-normal">Libelé</h6>
+                            </div>
+                            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right d-flex" style="margin-right: 1em;">
+                              <i class="icon-lg mdi mdi-update text-primary text-big ms-auto" style="font-size: 2em; margin-top: 0.35em; margin-right: 1em;"></i>
+                              <i class="icon-lg mdi mdi-delete text-danger text-big ms-auto" style="font-size: 2em; margin-top: 0.35em; margin-right: 1em;"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
                     </div>
-                    <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3">
-                     
-                    </div>
+                    <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3"></div>
+                    <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3"></div>
                   </div>
                 </div>
               </div>
@@ -500,5 +405,8 @@
     <!-- Custom js for this page -->
     <script src="assets/js/dashboard.js"></script>
     <!-- End custom js for this page -->
+    <script src="stock.js"> </script>
+    <script src="general.js"> </script>
+    <script src="classes.js"> </script>
   </body>
 </html>

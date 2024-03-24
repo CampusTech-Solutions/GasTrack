@@ -9,7 +9,7 @@ class GasStoreSerializer(GeoModelSerializer):
         model = GasStore
         geo_field = 'location'
         auto_bbox = True
-        fields = ["id", "name","manager","location", "image"]
+        fields = ["id", "name","manager","location", "image", "storeStatus"]
 
 class StockSerializer(serializers.ModelSerializer):
     class Meta:

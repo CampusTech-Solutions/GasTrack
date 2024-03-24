@@ -1,15 +1,7 @@
-
+"use strict";
 class SettingCard {
-    _id:string;
-    subject:string;
-    title:string;
-    label:string;
-    container_id:string = "cards-container"
-    iconClass:string;
-
-    static counter:number = 1;
-
-    constructor(subject:string, title:string, label:string, iconClass:string){
+    constructor(subject, title, label, iconClass) {
+        this.container_id = "cards-container";
         this.subject = subject;
         this.title = title;
         this.label = label;
@@ -17,9 +9,8 @@ class SettingCard {
         this._id = "info-" + SettingCard.counter;
         SettingCard.counter++;
     }
-
-    render():void {
-        var html:string = `<div class="col-sm-3 grid-margin" id=${this._id} onclick="onClick('${this._id}', '${this.title}')">
+    render() {
+        var html = `<div class="col-sm-3 grid-margin" id=${this._id} onclick="onClick('${this._id}', '${this.title}')">
         <div class="card">
           <div class="card-body">
             <h5>${this.subject}</h5>
@@ -36,10 +27,11 @@ class SettingCard {
             </div>
           </div>
         </div>
-        </div>`
-
+        </div>`;
         var container = document.getElementById(`${this.container_id}`);
-        if (container !== null) { container.innerHTML += html;}
+        if (container !== null) {
+            container.innerHTML += html;
+        }
     }
-
 }
+SettingCard.counter = 1;

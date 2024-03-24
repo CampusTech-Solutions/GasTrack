@@ -6,4 +6,5 @@ websocket_urlpatterns = [
     re_path(r'ws/gasbottle/$', consumers.GasBottleConsumer.as_asgi()),
     re_path(r'ws/gasbrand/$', consumers.GasBrandConsumer.as_asgi()),
     re_path(r'ws/stockgasbottle/$', consumers.StockGasBottleConsumer.as_asgi()),
+    re_path(r'ws/stock/$', consumers.StockConsumer.as_asgi()),
 ]

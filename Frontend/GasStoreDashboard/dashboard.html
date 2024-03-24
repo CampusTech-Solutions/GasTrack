@@ -19,7 +19,7 @@
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/newstyles.css">
+    <link rel="stylesheet" href="newstyles.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="assets/images/favicon.png" />
     <style>
@@ -28,8 +28,6 @@
         overflow-x: scroll;
         flex-wrap: nowrap;
       }
-
-      
     </style>
   </head>
   <body>
@@ -176,7 +174,16 @@
       
                 </div>
               </li>
-             
+              <form action="" class="nav-item" style="width: 30%; margin: 0em 1em;" >
+                <label class="switch" for="toggle">
+                  <input type="checkbox" id="toggle" name="toggle">
+                  <span class="switch"></span>
+                </label>
+                <div class="d-flex">
+                <i class="icon-lg mdi mdi-play text-small text-success ms-auto" id="switch-mdi"></i>
+                <span id="oc" style="font-size: 0.7em;">Ouvert</span>
+                </div>
+              </form>
            
               <li class="nav-item dropdown border-left">
                 <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
@@ -555,5 +562,8 @@
     <!-- Custom js for this page -->
     <script src="assets/js/dashboard.js"></script>
     <!-- End custom js for this page -->
+    <script src="dashboard.js"> </script>
+    <script src="general.js"> </script>
+    <script src="classes.js"> </script>
   </body>
 </html>

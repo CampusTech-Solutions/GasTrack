@@ -249,33 +249,3 @@
     }
     });
 })(jQuery);
-
-
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-
-    document.querySelector(this.getAttribute('href')).scrollIntoView({
-      behavior: 'smooth'
-    });
-  });
-});
-
-document.querySelectorAll('#cards-container .grid-margin').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-
-    document.querySelector('#tkt').scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'start'
-    });
-  });
-});
-
-window.addEventListener('wheel', function (e) {
-  if (e.deltaY !== 0) {
-    e.preventDefault();
-  }
-});

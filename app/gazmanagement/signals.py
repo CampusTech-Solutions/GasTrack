@@ -16,7 +16,7 @@ def update_stock(sender, instance=None, **kwargs):
 
     stock = instance.stock
     stock.total_bottles += new_qty
-    stock.value += instance.bottle.price*new_qty
+    stock.value += (instance.bottle.price+instance.supplementary_fee)*new_qty
     stock.updated_at = timezone.now()
     stock.save()
 

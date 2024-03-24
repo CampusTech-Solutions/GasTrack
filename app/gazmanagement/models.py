@@ -11,7 +11,9 @@ class GasStore(models.Model):
     manager = models.ForeignKey(GestStore, on_delete=models.CASCADE)
     location = models.PointField(srid=4326, null=True)
     image = models.ImageField(upload_to="gasmanagement/gasstores/", default="gasmanagement/gasstores/default.png")
-
+    store_status = models.BooleanField(default=True)
+    infos = models.TextField(blank=True, null=True)
+    
     created_at = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self) -> str:
