@@ -198,8 +198,8 @@ AUTH_USER_MODEL = "accounts.Client"
 
 STATIC_URL = '/static/'
 STATIC_ROOT =  os.path.join(BASE_DIR, 'static')
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'ressources')
+MEDIA_URL = '/ressources/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -221,5 +221,6 @@ LEAFLET_CONFIG = {
     "ATTRIBUTION_PREFIX": "Gaztrack API",
 }
 
-MEDIA_URL = 'resources/'
-MEDIA_ROOT = 'resources/'
+CLIENT_URL = '/client/'
+CLIENT_ROOT =  os.path.join(BASE_DIR, 'client')
+
