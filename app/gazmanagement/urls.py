@@ -31,11 +31,17 @@ urlpatterns += [
     path('brand/update/<int:id>/', GasBrandViewSet.as_view({'patch': 'partial_update'}), name='brand-update'),
     path('brand/delete/<int:id>/', GasBrandViewSet.as_view({'delete': 'destroy'}), name='brand-destroy'),
 
-    path('stockgasbottle/', StockGasBottleViewSet.as_view({'get': 'list'}), name='stockgasbottle-list'),
-    path('stockgasbottle/new/', StockGasBottleViewSet.as_view({'post': 'create'}), name='stockgasbottle-create'),
-    path('stockgasbottle/<int:id>/', StockGasBottleViewSet.as_view({'get': 'retrieve'}), name='stockgasbottle-retrieve'),
-    path('stockgasbottle/update/<int:id>/', StockGasBottleViewSet.as_view({'patch': 'partial_update'}), name='stockgasbottle-update'),
-    path('stockgasbottle/delete/<int:id>/', StockGasBottleViewSet.as_view({'delete': 'destroy'}), name='stockgasbottle-destroy'),
+    path('sales/', SalesViewSet.as_view({'get': 'list'}), name='sales-list'),
+    path('sales/new/', SalesViewSet.as_view({'post': 'create'}), name='sales-create'),
+    path('sales/<int:id>/', SalesViewSet.as_view({'get': 'retrieve'}), name='sales-retrieve'),
+    path('sales/update/<int:id>/', SalesViewSet.as_view({'patch': 'partial_update'}), name='sales-update'),
+    path('sales/delete/<int:id>/', SalesViewSet.as_view({'delete': 'destroy'}), name='sales-destroy'),
+    
+    path('entries/', EntriesViewSet.as_view({'get': 'list'}), name='entries-list'),
+    path('entries/new/', EntriesViewSet.as_view({'post': 'create'}), name='entries-create'),
+    path('entries/<int:id>/', EntriesViewSet.as_view({'get': 'retrieve'}), name='entries-retrieve'),
+    path('entries/update/<int:id>/', EntriesViewSet.as_view({'patch': 'partial_update'}), name='entries-update'),
+    path('entries/delete/<int:id>/', EntriesViewSet.as_view({'delete': 'destroy'}), name='entries-destroy'),
 
     path('stock/', StockViewSet.as_view({'get': 'list'}), name='stock-list'),
     path('stock/new/', StockViewSet.as_view({'post': 'create'}), name='stock-create'),

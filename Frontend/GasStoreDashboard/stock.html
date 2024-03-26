@@ -38,12 +38,7 @@
         height: min-content;
       }
       
-      #cards-container{
-        display: flex;
-        flex-wrap: wrap;
-        height: 35.25em;
-        overflow: scroll;
-      }
+      
 
       #cards-container .card{
         margin-right: 1.25em;
@@ -306,65 +301,153 @@
                       <i class="icon-lg mdi mdi-menu-left text-grey ms-auto d-block" style="margin-left: 0em !important;" onclick="ScrollTo('sub-row-1')"></i>
                       <h4 class="card-title" id="new-card-title" style="align-self: center; font-size: 2em;">Title</h4>
                     </div>
-                    <div class="form-containers" id="form-stock-container">
-                      <form action="" class="data-forms" id="stock-form">
-                        <div class="form-title" id="">Créer Un Stock</div>
-                        <div class="form-stock-labels" for="stock-name">
-                          <input type="text" id="stock-name" name="stock-name" placeholder="Nom du Stock">
-                          <span class="form-stock-labels"></span>
-                        </div>
-                        <div class="form-stock-labels" for="stock-label">
-                          <input type="text" id="stock-label" name="stock-label" placeholder="Libelé">
-                          <span class="form-stock-labels"></span>
-                        </div>
-                        <div class="form-stock-labels" for="stock-submit">
-                          <input type="submit" id="stock-submit" name="stock-submit" value="Enregistrer">
-                        </div>
-                      </form>
-                      <form action="" class="data-forms" id="stock-form-2" >
-                        <div class="form-title" id="">Stock Enregistrés</div>
-                        <div class="" id="stock-list-container">
-                          <div class="col-sm-7 d-flex" id="stock-list-1" onclick="">
-                            <div class="col-5 col-sm-3 col-xl-5 my-auto" style="width: 70%;">
-                              <div class="">
-                                <h4 class="">Nom stock</h4>
+                    <div id="main-data-container">
+                      <div class="form-containers" id="form-stock-container" style="border-bottom: 1px solid black; border-top: 1px solid black;">
+                        <div class="sub-fsc" id="sub-fsc-1">
+                          <div class="" id="" style="margin: 0em 0em 1em 0em;">
+                            <form action="" style="width: 100%;">
+                              <input type="search" name="search-gas-update" id="search-gas-update" placeholder="Rechercher">
+                            </form>
+                          </div>
+                          <div id="search-data-container-main">
+                            <div class="d-flex" id="search-data-container">
+                              <div class="image-container" id="">
+                                <img src="assets/images/b4.png" style="width: 100%; height: 100px;" alt="bottle">
                               </div>
-                              <h6 class="text-muted font-weight-normal">Libelé</h6>
+                              <div class="" id="">
+                                <ul id="search-side-infos">
+                                  <li><span style="color: gray;">Marque: </span>OLA</li>
+                                  <li><span style="color: gray;">Poids: </span>12.5kg</li>
+                                  <li><span style="color: gray;">PU: </span>6500F</li>
+                                  <li><span style="color: gray;">Qté: </span>45</li>
+                                </ul>
+                              </div>
                             </div>
-                            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right d-flex" style="margin-right: 1em;">
-                              <i class="icon-lg mdi mdi-update text-primary text-big ms-auto" style="font-size: 2em; margin-top: 0.35em; margin-right: 1em;"></i>
-                              <i class="icon-lg mdi mdi-delete text-danger text-big ms-auto" style="font-size: 2em; margin-top: 0.35em; margin-right: 1em;"></i>
+                            <div class="d-flex" id="search-data-container">
+                              <div class="image-container" id="">
+                                <img src="assets/images/b4.png" style="width: 100%; height: 100px;" alt="bottle">
+                              </div>
+                              <div class="" id="">
+                                <ul id="search-side-infos">
+                                  <li><span style="color: gray;">Marque: </span>OLA</li>
+                                  <li><span style="color: gray;">Poids: </span>12.5kg</li>
+                                  <li><span style="color: gray;">PU: </span>6500F</li>
+                                  <li><span style="color: gray;">Qté: </span>45</li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="d-flex" id="search-data-container">
+                              <div class="image-container" id="">
+                                <img src="assets/images/b4.png" style="width: 100%; height: 100px;" alt="bottle">
+                              </div>
+                              <div class="" id="">
+                                <ul id="search-side-infos">
+                                  <li><span style="color: gray;">Marque: </span>OLA</li>
+                                  <li><span style="color: gray;">Poids: </span>12.5kg</li>
+                                  <li><span style="color: gray;">PU: </span>6500F</li>
+                                  <li><span style="color: gray;">Qté: </span>45</li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="d-flex" id="search-data-container">
+                              <div class="image-container" id="">
+                                <img src="assets/images/b4.png" style="width: 100%; height: 100px;" alt="bottle">
+                              </div>
+                              <div class="" id="">
+                                <ul id="search-side-infos">
+                                  <li><span style="color: gray;">Marque: </span>OLA</li>
+                                  <li><span style="color: gray;">Poids: </span>12.5kg</li>
+                                  <li><span style="color: gray;">PU: </span>6500F</li>
+                                  <li><span style="color: gray;">Qté: </span>45</li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="d-flex" id="search-data-container">
+                              <div class="image-container" id="">
+                                <img src="assets/images/b4.png" style="width: 100%; height: 100px;" alt="bottle">
+                              </div>
+                              <div class="" id="">
+                                <ul id="search-side-infos">
+                                  <li><span style="color: gray;">Marque: </span>OLA</li>
+                                  <li><span style="color: gray;">Poids: </span>12.5kg</li>
+                                  <li><span style="color: gray;">PU: </span>6500F</li>
+                                  <li><span style="color: gray;">Qté: </span>45</li>
+                                </ul>
+                              </div>
                             </div>
                           </div>
-                          <div class="col-sm-7 d-flex" id="stock-list-1" onclick="">
-                            <div class="col-5 col-sm-3 col-xl-5 my-auto" style="width: 70%;">
-                              <div class="">
-                                <h4 class="">Nom stock</h4>
-                              </div>
-                              <h6 class="text-muted font-weight-normal">Libelé</h6>
-                            </div>
-                            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right d-flex" style="margin-right: 1em;">
-                              <i class="icon-lg mdi mdi-update text-primary text-big ms-auto" style="font-size: 2em; margin-top: 0.35em; margin-right: 1em;"></i>
-                              <i class="icon-lg mdi mdi-delete text-danger text-big ms-auto" style="font-size: 2em; margin-top: 0.35em; margin-right: 1em;"></i>
-                            </div>
+                        </div>
+                        <div class="sub-fsc" id="sub-fsc-2">
+                          <h4>BOUTEILLE</h4>
+                          <div class="image-container" id="">
+                            <img src="assets/images/b4.png" style="width: 100%; height: 200px" alt="bottle">
                           </div>
-                          <div class="col-sm-7 d-flex" id="stock-list-1" onclick="">
-                            <div class="col-5 col-sm-3 col-xl-5 my-auto" style="width: 70%;">
-                              <div class="">
-                                <h4 class="">Nom stock</h4>
+                          <div action="" class="data-forms-update d-flex" id="stock--update-form" style="margin-top: 2.5em;">
+                            <div class="info-display" id="info-display-1" style="margin-right: 7em;">
+                              <div class="stock-update-data d-flex">
+                                <div class="update-name" id="">Stock</div>
+                                <div class="update-data" id="ud-1">Main Stock</div>
+                                <i class="icon-lg mdi mdi-pencil text-primary ms-auto stock-icons"></i>
                               </div>
-                              <h6 class="text-muted font-weight-normal">Libelé</h6>
+                              <div class="stock-update-data d-flex">
+                                <div class="update-name" id="">Marque</div>
+                                <div class="update-data" id="ud-1">OLA</div>
+                                <i class="icon-lg mdi mdi-pencil text-primary ms-auto stock-icons"></i>
+                              </div>
+                              <div class="stock-update-data d-flex">
+                                <div class="update-name" id="">Poids</div>
+                                <div class="update-data" id="ud-1">12.5</div>
+                                <i class="icon-lg mdi mdi-pencil text-primary ms-auto stock-icons"></i>
+                              </div>
                             </div>
-                            <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right d-flex" style="margin-right: 1em;">
-                              <i class="icon-lg mdi mdi-update text-primary text-big ms-auto" style="font-size: 2em; margin-top: 0.35em; margin-right: 1em;"></i>
-                              <i class="icon-lg mdi mdi-delete text-danger text-big ms-auto" style="font-size: 2em; margin-top: 0.35em; margin-right: 1em;"></i>
+                            <div class="info-display" id="info-display-2">
+                              <div class="stock-update-data d-flex">
+                                <div class="update-name" id="">Prix</div>
+                                <div class="update-data" id="ud-1">6500</div>
+                                <i class="icon-lg mdi mdi-pencil text-primary ms-auto stock-icons"></i>
+                              </div>
+                              <div class="stock-update-data d-flex">
+                                <div class="update-name" id="">Quantité</div>
+                                <div class="update-data" id="ud-1">45</div>
+                                <i class="icon-lg mdi mdi-pencil text-primary ms-auto stock-icons"></i>
+                              </div>
+                              <button class="save-here" id="btn-update-sgb">Enregistrer</button>
                             </div>
                           </div>
                         </div>
-                      </form>
+                      </div>
+                      <!-- <div class="form-foot-container">
+                        <div class="" style="padding: 1em;">
+                          <h4>STOCK</h4>
+                          <div class="d-flex">
+                          <div class="">
+                            <div class="stock-update-data d-flex">
+                              <div class="update-name" id="">Nom</div>
+                              <div class="update-data" id="ud-1">Stock Principal</div>
+                              <i class="icon-lg mdi mdi-pencil text-primary ms-auto stock-icons"></i>
+                            </div>
+                            <div class="stock-update-data d-flex">
+                              <div class="update-name" id="">Libelé</div>
+                              <div class="update-data" id="ud-1">Stock Principal</div>
+                              <i class="icon-lg mdi mdi-pencil text-primary ms-auto stock-icons"></i>
+                            </div>
+                            
+                          </div>
+                          <div>
+                            <div class="stock-update-data d-flex">
+                              <div class="update-name" id="">Nombre de bouteille Total</div>
+                              <div class="update-data" id="ud-1">480</div>
+                            </div>
+                            <div class="stock-update-data d-flex">
+                              <div class="update-name" id="">Valeur</div>
+                              <div class="update-data" id="ud-1">4,71M</div>
+                            </div>
+                          </div>
+                        </div>
+                        <button type="button">Enregistrer</button>
+                        </div>
+                      </div> -->
                     </div>
-                    <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3"></div>
-                    <div class="bg-gray-dark d-flex d-md-block d-xl-flex flex-row py-3 px-4 px-md-3 px-xl-4 rounded mt-3"></div>
                   </div>
                 </div>
               </div>

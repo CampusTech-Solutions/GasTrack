@@ -218,13 +218,13 @@ class GasBrandConsumer(AsyncWebsocketConsumer):
         await self.send(text_data=json.dumps(gasbrand_data))
 
 
-class StockGasBottleConsumer(AsyncWebsocketConsumer):
+class SalesConsumer(AsyncWebsocketConsumer):
     permission_classes = [IsAuthenticated,]
-    groups = ['stockgasbottle']
+    groups = ['sales']
 
     
     async def connect(self):
-        self.group_name = 'stockgasbottle'
+        self.group_name = 'sales'
         await self.accept()
 
     async def disconnect(self, close_code):
@@ -236,10 +236,10 @@ class StockGasBottleConsumer(AsyncWebsocketConsumer):
         action = data.get('action')
 
         if action == "create":
-            stockgasbottle_data = await self.create_stock_gas_bottle(message)
+            sales_data = await self.create_stock_gas_bottle(message)
             await self.channel_layer.group_send(
                 self.group_name,
-                {"type": "send.data", "data": stockgasbottle_data}
+                {"type": "send.data", "data": sales_data}
             )
         elif action == "delete":
             msg = await self.delete_stock_gas_bottle(message)
@@ -257,9 +257,9 @@ class StockGasBottleConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def create_stock_gas_bottle(self, message):
         try:
-            stockgasbottle = StockGasBottle.objects.create(bottle_id=message.pop("bottle"), stock_id=message.pop("stock"), **message)
-            stockgasbottle_data = StockGasBottleSerializer(stockgasbottle)
-            return stockgasbottle_data.data
+            sales = Sales.objects.create(bottle_id=message.pop("bottle"), stock_id=message.pop("stock"), **message)
+            sales_data = SalesSerializer(sales)
+            return sales_data.data
         except:
             return {"error": "error creating gas bottle's stock..."}
     
@@ -267,10 +267,10 @@ class StockGasBottleConsumer(AsyncWebsocketConsumer):
     def update_stock_gas_bottle(self, message):
         try:
             id = message.pop("id")
-            Bool = StockGasBottle.objects.filter(id=id).update(**message)
-            stockgasbottle = StockGasBottle.objects.get(id=id)
-            stockgasbottle_data = StockGasBottleSerializer(stockgasbottle)
-            return stockgasbottle_data.data
+            Bool = Sales.objects.filter(id=id).update(**message)
+            sales = Sales.objects.get(id=id)
+            sales_data = SalesSerializer(sales)
+            return sales_data.data
         except:
             return {"error": "error updating gas bottle's stock..."}
 
@@ -278,16 +278,88 @@ class StockGasBottleConsumer(AsyncWebsocketConsumer):
     def delete_stock_gas_bottle(self, message):
         try:
             if isinstance(message, int):
-                StockGasBottle.objects.get(id=message).delete()
+                Sales.objects.get(id=message).delete()
             else:
-                StockGasBottle.objects.filter(id__in=message).delete()
+                Sales.objects.filter(id__in=message).delete()
             return {"message":"deletion successful !"}
         except Exception as e:
             return {"error":"error deleting gas bottle's stock..."}
 
     async def send_data(self, event):
-        stockgasbottle_data = event["data"]
-        await self.send(text_data=json.dumps(stockgasbottle_data))
+        sales_data = event["data"]
+        await self.send(text_data=json.dumps(sales_data))
+
+
+class EntriesConsumer(AsyncWebsocketConsumer):
+    permission_classes = [IsAuthenticated,]
+    groups = ['entries']
+
+    
+    async def connect(self):
+        self.group_name = 'entries'
+        await self.accept()
+
+    async def disconnect(self, close_code):
+        await self.channel_layer.group_discard(self.group_name, self.channel_name)
+
+    async def receive(self, text_data):
+        data = json.loads(text_data)
+        message = data.get('message')
+        action = data.get('action')
+
+        if action == "create":
+            entries_data = await self.create_stock_gas_bottle(message)
+            await self.channel_layer.group_send(
+                self.group_name,
+                {"type": "send.data", "data": entries_data}
+            )
+        elif action == "delete":
+            msg = await self.delete_stock_gas_bottle(message)
+            await self.channel_layer.group_send(
+                self.group_name,
+                {"type": "send.data", "data": msg}
+            )
+        elif  action == "update":
+            msg = await self.update_stock_gas_bottle(message)
+            await self.channel_layer.group_send(
+                self.group_name,
+                {"type": "send.data", "data": msg}
+            )
+
+    @database_sync_to_async
+    def create_stock_gas_bottle(self, message):
+        # try:
+        entries = Entries.objects.create(bottle_id=message.pop("bottle"), stock_id=message.pop("stock"), **message)
+        entries_data = EntriesSerializer(entries)
+        return entries_data.data
+        # except:
+        #     return {"error": "error creating new entriy..."}
+    
+    @database_sync_to_async
+    def update_stock_gas_bottle(self, message):
+        try:
+            id = message.pop("id")
+            Bool = Entries.objects.filter(id=id).update(**message)
+            entries = Entries.objects.get(id=id)
+            entries_data = EntriesSerializer(entries)
+            return entries_data.data
+        except:
+            return {"error": "error updating gas bottle's stock..."}
+
+    @database_sync_to_async
+    def delete_stock_gas_bottle(self, message):
+        try:
+            if isinstance(message, int):
+                Entries.objects.get(id=message).delete()
+            else:
+                Entries.objects.filter(id__in=message).delete()
+            return {"message":"deletion successful !"}
+        except Exception as e:
+            return {"error":"error deleting gas bottle's stock..."}
+
+    async def send_data(self, event):
+        entries_data = event["data"]
+        await self.send(text_data=json.dumps(entries_data))
 
 
 class StockConsumer(AsyncWebsocketConsumer):
