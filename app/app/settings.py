@@ -66,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'app.urls'
@@ -171,14 +172,19 @@ USE_L10N = True
 
 USE_TZ = True
 
-#CORS_ALLOWED_ORIGINS = [
-#    'http://192.168.112.16',
-#]
-#
-#CSRF_TRUSTED_ORIGINS = [
-#    'http://127.0.0.1',
-#    
-#]
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:8000',
+    'http://127.0.0.1:8080',
+    'http://localhost:8080',
+    'http://localhost:8000'
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:8080',
+    'http://127.0.0.1:8000',
+    'http://localhost:8080',
+    'http://localhost:8000'
+]
 
 CORS_ORIGIN_ALLOW_ALL = True
 CSRF_ORIGIN_ALLOW_ALL = True
