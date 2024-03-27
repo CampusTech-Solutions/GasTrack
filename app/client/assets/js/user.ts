@@ -366,8 +366,11 @@ let user = new User(id,username,email,null,null,null);
 user.fetchUser();
 
 $('#update-info').on('click',user.update);
-setTimeout(() => {
+if(location.href == `http://${web_url}/client/reset-password.html`){
+  setTimeout(() => {
   user.passwordReset();
 }, 200);
  ;
+}
+
 

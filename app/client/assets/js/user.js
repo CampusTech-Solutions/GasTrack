@@ -238,7 +238,9 @@ let email = window.localStorage.getItem("Email");
 let user = new User(id, username, email, null, null, null);
 user.fetchUser();
 $('#update-info').on('click', user.update);
-setTimeout(() => {
-    user.passwordReset();
-}, 200);
-;
+if (location.href == `http://${web_url}/client/reset-password.html`) {
+    setTimeout(() => {
+        user.passwordReset();
+    }, 200);
+    ;
+}
