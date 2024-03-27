@@ -5,12 +5,39 @@ from django.conf import settings
 from .models import *
 
 
-@receiver(post_save, sender=GasStore)
-def create_stock(sender, instance=None, **kwargs):
-    Stock.objects.create(store=instance)
-
 @receiver(pre_delete, sender=GasStore)
 def delete_stock(sender, instance=None, **kwargs):
     Stock.objects.filter(store=instance).delete()
+
+
+@receiver(post_save, sender=Sales)
+def update_stock_gas_bottle(sender, instance=None, **kwargs):
+    sgb = StockGasBottle.objects.filter(store=instance.stock, bottle=instance.bottle).first()
+    if sgb:
+        sgb.quantity -= instance.quantity
+        sgb.save()
+
+@receiver(post_save, sender=Entries)
+def create_update_stock_gas_bottle(sender, instance=None, **kwargs):
+    sgb = StockGasBottle.objects.filter(
+        stock=instance.stock, 
+        bottle=instance.bottle, 
+        unit_cost_price=instance.unit_cost_price,
+        unit_selling_price=instance.unit_selling_price
+        ).first()
+
+    if sgb:
+        sgb.quantity += instance.quantity
+        sgb.save()
+    else:
+        new_stock = Stock.objects.create(store=instance.stock.store)
+        StockGasBottle.objects.create(
+            stock=new_stock,
+            bottle=instance.bottle,
+            quantity=instance.quantity,
+            unit_cost_price=instance.unit_cost_price,
+            unit_selling_price=instance.unit_selling_price
+        )
+
 
 

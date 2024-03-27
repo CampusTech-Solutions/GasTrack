@@ -1,5 +1,5 @@
 from rest_framework import viewsets, permissions
-from .serializers import *
+from gazmanagement.serializers import *
 from django.http import JsonResponse
 from django.db import transaction
 
@@ -58,24 +58,54 @@ class StockViewSet(viewsets.ModelViewSet):
     serializer_class = StockSerializer
     queryset = Stock.objects.all()
 
+    def create(self, request, *args, **kwargs):
+        try:
+            stock = Stock.objects.create(store_id= request.data.pop("store"), **request.data)
+        except Exception as error:
+            return JsonResponse({"error": str(error)}, status=500)
 
-class StockGasBottleViewSet(viewsets.ModelViewSet):
+        stock_slz = StockSerializer(stock)
+
+        return JsonResponse({"data" : stock_slz.data}, status=201)
+
+
+class SalesViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
     lookup_field = 'id'
-    serializer_class = StockGasBottleSerializer
-    queryset = StockGasBottle.objects.all()
+    serializer_class = SalesSerializer
+    queryset = Sales.objects.all()
 
     def create(self, request, **args):
         bottle = GasBottle.objects.get(id=request.data.pop("bottle"))
-        store = GasStore.objects.get(id=request.data.pop("store"))
-        stock = store.getStock()
+        stock = Stock.objects.get(id=request.data.pop("stock"))
 
-        try:
-            element = StockGasBottle.objects.create(bottle= bottle, stock= stock, **request.data)
-        except Exception as error:
-            return JsonResponse({"error": str(error)}, status=500)
+        with transaction.atomic():
+            try:
+                element = Sales.objects.create(bottle= bottle, stock= stock, **request.data)
+            except Exception as error:
+                return JsonResponse({"error": str(error)}, status=500)
+
+        element_slz = SalesSerializer(element)
+
+        return JsonResponse({"data" : element_slz.data}, status=201)
+
+class EntriesViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
+    lookup_field = 'id'
+    serializer_class = EntriesSerializer
+    queryset = Entries.objects.all()
+
+    def create(self, request, **args):
+        bottle = GasBottle.objects.get(id=request.data.pop("bottle"))
+        stock = Stock.objects.get(id=request.data.pop("stock"))
+
+        with transaction.atomic():
+            try:
+                element = Entries.objects.create(bottle= bottle, stock= stock, **request.data)
+            except Exception as error:
+                return JsonResponse({"error": str(error)}, status=500)
         
-        element_slz = StockGasBottleSerializer(element)
+        element_slz = EntriesSerializer(element)
 
         return JsonResponse({"data" : element_slz.data}, status=201)
 
