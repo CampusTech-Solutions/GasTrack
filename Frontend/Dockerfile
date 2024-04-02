@@ -6,4 +6,4 @@ RUN  npm install -g typescript
 
 COPY . .
 
-RUN tsc
+

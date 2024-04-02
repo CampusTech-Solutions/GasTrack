@@ -3,4 +3,10 @@ app/db.sqlite3
 app/*/__pycache__/
 env/
 app/geoip/
+<<<<<<< HEAD
+static/
+=======
+Frontend/*/assets/
+>>>>>>> 54811c72a738305a0a16727f8871647c2f6ef43c
+
 Frontend/admin/

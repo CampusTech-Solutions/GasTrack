@@ -212,7 +212,7 @@ class PasswordResetViewSet(viewsets.ModelViewSet):
         
         if serializers.is_valid(): 
            serializers.save()
-           return HttpResponseRedirect(f"http://127.0.0.1:8000/accounts/password-reset-success")
+           return Response({"code" : serializers.code}, status=status.HTTP_200_OK)
         
     
     def list(self, request):
@@ -232,10 +232,11 @@ class ResetViewSet(viewsets.ModelViewSet):
         serializers = self.serializer_class(data=request.data)
         
         if serializers.is_valid(): 
-            code =  request.data["code"]
+            code =  serializers.validated_data["code"]
             
             try:
                user= Client.objects.get(code=code)
+               print(f"username = {user.username}")
                
             except Client.DoesNotExist:
                 response = {
@@ -246,7 +247,7 @@ class ResetViewSet(viewsets.ModelViewSet):
                 
                 return Response(response,status=status.HTTP_404_NOT_FOUND)
             
-            password = request.data["password"]
+            password = serializers.validated_data["password"]
             user.password = password
             user.save()
             
