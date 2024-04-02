@@ -4,12 +4,15 @@ from rest_framework import serializers
 from rest_framework_gis.serializers import GeoModelSerializer
 
 class GasStoreSerializer(GeoModelSerializer):
-    manager = GestStoreSerializer()
+    # manager = GestStoreSerializer()
     class Meta:
         model = GasStore
         geo_field = 'location'
         auto_bbox = True
         fields = ["id", "name","manager","location", "image", "store_status"]
+    
+    # def create(self, validated_data):...
+        
 
 
 class GasBrandSerializer(serializers.ModelSerializer):

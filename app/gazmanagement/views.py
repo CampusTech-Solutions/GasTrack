@@ -15,19 +15,18 @@ class GasStoreViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
     lookup_field = 'id'
     serializer_class = GasStoreSerializer
-    queryset = GasStore.objects.all()#
+    queryset = GasStore.objects.all()
 
     def create(self, request, *args, **kwargs):
 
-        manager = GestStore.objects.get(id=request.data.pop("manager"))
-    
         try:
-            with transaction.atomic():
-                store = GasStore.objects.create(manager= manager, **request.data)
+            gasstore_serializer = self.get_serializer(data=request.data)
+            gasstore_serializer.is_valid(raise_exception=True)
+            gasstore = gasstore_serializer.save()
         except Exception as error:
             return JsonResponse({"error": str(error)}, status=500)
         
-        store_slz = GasStoreSerializer(store)
+        store_slz = GasStoreSerializer(gasstore)
 
         return JsonResponse({"data" : store_slz.data}, status=201)
 

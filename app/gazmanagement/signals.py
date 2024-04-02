@@ -12,7 +12,7 @@ def delete_stock(sender, instance=None, **kwargs):
 
 @receiver(post_save, sender=Sales)
 def update_stock_gas_bottle(sender, instance=None, **kwargs):
-    sgb = StockGasBottle.objects.filter(store=instance.stock, bottle=instance.bottle).first()
+    sgb = StockGasBottle.objects.filter(stock=instance.stock, bottle=instance.bottle).first()
     if sgb:
         sgb.quantity -= instance.quantity
         sgb.save()
@@ -20,10 +20,9 @@ def update_stock_gas_bottle(sender, instance=None, **kwargs):
 @receiver(post_save, sender=Entries)
 def create_update_stock_gas_bottle(sender, instance=None, **kwargs):
     sgb = StockGasBottle.objects.filter(
-        stock=instance.stock, 
-        bottle=instance.bottle, 
-        unit_cost_price=instance.unit_cost_price,
-        unit_selling_price=instance.unit_selling_price
+            bottle=instance.bottle, 
+            unit_cost_price=instance.unit_cost_price,
+            unit_selling_price=instance.unit_selling_price
         ).first()
 
     if sgb:
@@ -31,6 +30,7 @@ def create_update_stock_gas_bottle(sender, instance=None, **kwargs):
         sgb.save()
     else:
         new_stock = Stock.objects.create(store=instance.stock.store)
+
         StockGasBottle.objects.create(
             stock=new_stock,
             bottle=instance.bottle,

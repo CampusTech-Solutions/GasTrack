@@ -16,7 +16,7 @@ fake = Faker()
 class ClientFactory(UserFactory):
     class Meta:
         model = Client
-    
+
     no_cni = factory.Sequence(lambda n: fake.unique.random_number(digits=10))
     phone_No = factory.Sequence(lambda n: fake.unique.phone_number())
     code = factory.Sequence(lambda n: fake.random_number(digits=6))
@@ -26,7 +26,7 @@ class ClientFactory(UserFactory):
 class GestStoreFactory(ClientFactory):
     class Meta:
         model = GestStore
-    
+
     matricule = factory.Sequence(lambda n: fake.random_number(digits=8))
 
 
@@ -45,7 +45,7 @@ class GasStoreFactory(DjangoModelFactory):
 class StockFactory(DjangoModelFactory):
     class Meta:
         model = Stock
-    
+
     name = factory.Sequence(lambda n: fake.sentence(nb_words=4))
     store = factory.SubFactory(GasStoreFactory)
     label = factory.Sequence(lambda n: fake.sentence(nb_words=15))
@@ -54,7 +54,7 @@ class StockFactory(DjangoModelFactory):
 class GasBrandFactory(DjangoModelFactory):
     class Meta:
         model = GasBrand
-    
+
     name = factory.Sequence(lambda n: fake.company()+" Gas")
     compagny = factory.Sequence(lambda n: fake.company())
 
