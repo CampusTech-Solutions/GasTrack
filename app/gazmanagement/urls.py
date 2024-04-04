@@ -49,6 +49,7 @@ urlpatterns += [
     path('stock/update/<int:id>/', StockViewSet.as_view({'patch': 'partial_update'}), name='stock-update'),
     path('stock/delete/<int:id>/', StockViewSet.as_view({'delete': 'destroy'}), name='stock-destroy'),
 
+    path('getstore/', GasStoreViewSet.as_view({'get': 'retrievestore'}), name='retrieve-manager-store'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

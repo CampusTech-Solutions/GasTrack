@@ -4,14 +4,12 @@ from rest_framework import serializers
 from rest_framework_gis.serializers import GeoModelSerializer
 
 class GasStoreSerializer(GeoModelSerializer):
-    # manager = GestStoreSerializer()
     class Meta:
         model = GasStore
         geo_field = 'location'
         auto_bbox = True
         fields = ["id", "name","manager","location", "image", "store_status"]
-    
-    # def create(self, validated_data):...
+
         
 
 
@@ -23,14 +21,12 @@ class GasBrandSerializer(serializers.ModelSerializer):
 
 
 class GasBottleSerializer(serializers.ModelSerializer):
-    brand = GasBrandSerializer()
     class Meta:
         model = GasBottle
         fields = ["id", "brand", "image", "weight"]
 
 
 class StockSerializer(serializers.ModelSerializer):
-    store = GasStoreSerializer()
 
     class Meta:
         model = Stock
@@ -38,16 +34,12 @@ class StockSerializer(serializers.ModelSerializer):
 
 
 class StockGasBottleSerializer(serializers.ModelSerializer):
-    stock = StockSerializer()
-    bottle = GasBottleSerializer()
 
     class Meta:
         model = StockGasBottle
         fields = '__all__'
 
 class SalesSerializer(serializers.ModelSerializer):
-    stock = StockSerializer()
-    bottle = GasBottleSerializer()
 
     class Meta:
         model = Sales
@@ -55,13 +47,7 @@ class SalesSerializer(serializers.ModelSerializer):
 
 
 class EntriesSerializer(serializers.ModelSerializer):
-    stock = StockSerializer()
-    bottle = GasBottleSerializer()
 
     class Meta:
         model = Entries
         fields = '__all__'
-    
-
-    
-    

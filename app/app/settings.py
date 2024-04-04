@@ -199,8 +199,8 @@ AUTH_USER_MODEL = "accounts.Client"
 
 STATIC_URL = '/static/'
 STATIC_ROOT =  os.path.join(BASE_DIR, 'static')
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'ressources')
-MEDIA_URL = '/ressources/'
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'resources')
+MEDIA_URL = '/resources/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -224,4 +224,7 @@ LEAFLET_CONFIG = {
 
 CLIENT_URL = '/client/'
 CLIENT_ROOT =  os.path.join(BASE_DIR, 'client')
+
+MANAGER_URL = '/manager/'
+MANAGER_ROOT =  os.path.join(BASE_DIR, 'manager')
 

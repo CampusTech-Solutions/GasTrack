@@ -2,6 +2,7 @@ from rest_framework import viewsets, permissions
 from gazmanagement.serializers import *
 from django.http import JsonResponse
 from django.db import transaction
+from django.shortcuts import redirect
 
 
 class GasBrandViewSet(viewsets.ModelViewSet):
@@ -29,6 +30,11 @@ class GasStoreViewSet(viewsets.ModelViewSet):
         store_slz = GasStoreSerializer(gasstore)
 
         return JsonResponse({"data" : store_slz.data}, status=201)
+    
+    def retrievestore(self, request):
+        gs = GasStore.objects.filter(manager_id=request.user.id).first()
+        store_slz = GasStoreSerializer(gs)
+        return JsonResponse({"data" : store_slz.data}, status=200)
 
 
 class GasBottleViewSet(viewsets.ModelViewSet):
@@ -39,16 +45,16 @@ class GasBottleViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
 
-        brand = GasBrand.objects.get(id=request.data.pop("brand"))
-    
         try:
-            gasbottle = GasBottle.objects.create(brand= brand, **request.data)
+            gasbottle_serializer = self.get_serializer(data=request.data)
+            gasbottle_serializer.is_valid(raise_exception=True)
+            gasbottle = gasbottle_serializer.save()
         except Exception as error:
             return JsonResponse({"error": str(error)}, status=500)
         
-        gasbottle_slz = GasBottleSerializer(gasbottle)
+        bottle_slz = GasBottleSerializer(gasbottle)
 
-        return JsonResponse({"data" : gasbottle_slz.data}, status=201)
+        return JsonResponse({"data" : bottle_slz.data}, status=201)
 
 
 class StockViewSet(viewsets.ModelViewSet):
@@ -59,10 +65,12 @@ class StockViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         try:
-            stock = Stock.objects.create(store_id= request.data.pop("store"), **request.data)
+            stock_serializer = self.get_serializer(data=request.data)
+            stock_serializer.is_valid(raise_exception=True)
+            stock = stock_serializer.save()
         except Exception as error:
             return JsonResponse({"error": str(error)}, status=500)
-
+        
         stock_slz = StockSerializer(stock)
 
         return JsonResponse({"data" : stock_slz.data}, status=201)
@@ -74,19 +82,17 @@ class SalesViewSet(viewsets.ModelViewSet):
     serializer_class = SalesSerializer
     queryset = Sales.objects.all()
 
-    def create(self, request, **args):
-        bottle = GasBottle.objects.get(id=request.data.pop("bottle"))
-        stock = Stock.objects.get(id=request.data.pop("stock"))
+    def create(self, request, *args, **kwargs):
+        try:
+           sales_serializer = self.get_serializer(data=request.data)
+           sales_serializer.is_valid(raise_exception=True)
+           sales =sales_serializer.save()
+        except Exception as error:
+            return JsonResponse({"error": str(error)}, status=500)
+        
+        sales_slz = SalesSerializer(sales)
 
-        with transaction.atomic():
-            try:
-                element = Sales.objects.create(bottle= bottle, stock= stock, **request.data)
-            except Exception as error:
-                return JsonResponse({"error": str(error)}, status=500)
-
-        element_slz = SalesSerializer(element)
-
-        return JsonResponse({"data" : element_slz.data}, status=201)
+        return JsonResponse({"data" : sales_slz.data}, status=201)
 
 class EntriesViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
@@ -94,19 +100,17 @@ class EntriesViewSet(viewsets.ModelViewSet):
     serializer_class = EntriesSerializer
     queryset = Entries.objects.all()
 
-    def create(self, request, **args):
-        bottle = GasBottle.objects.get(id=request.data.pop("bottle"))
-        stock = Stock.objects.get(id=request.data.pop("stock"))
-
-        with transaction.atomic():
-            try:
-                element = Entries.objects.create(bottle= bottle, stock= stock, **request.data)
-            except Exception as error:
-                return JsonResponse({"error": str(error)}, status=500)
+    def create(self, request, *args, **kwargs):
+        try:
+           entries_serializer = self.get_serializer(data=request.data)
+           entries_serializer.is_valid(raise_exception=True)
+           entries =entries_serializer.save()
+        except Exception as error:
+            return JsonResponse({"error": str(error)}, status=500)
         
-        element_slz = EntriesSerializer(element)
+        entries_slz = EntriesSerializer(entries)
 
-        return JsonResponse({"data" : element_slz.data}, status=201)
+        return JsonResponse({"data" : entries_slz.data}, status=201)
 
 
 
