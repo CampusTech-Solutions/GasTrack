@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+  <title>Acceuil-GazTrack</title>
+
+  <link rel="stylesheet" href="assets/css/maicons.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+
+  <link rel="stylesheet" href="assets/vendor/owl-carousel/css/owl.carousel.css">
+
+  <link rel="stylesheet" href="assets/vendor/animate/animate.css">
+
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/account.css">
+  <link rel="stylesheet" href="/static/leaflet/leaflet.css">
+</head>
+<body>
+
+  <!-- Back to top button -->
+  <div class="back-to-top"></div>
+
+  <header>
+    <div class="topbar">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 text-sm">
+            <div class="site-info">
+              
+              <a href="#"><span class="mx-3 text-black-50">Service client</span><span class="mai-call" style="color: #F99D2C;"></span> +237 777777777</a>
+              <span class="divider">|</span>
+              <a href="#"><span class="mai-mail" style="color: #F99D2C;"></span>campustechsolution237@gmail.com</a>
+            </div>
+          </div>
+          <div class="col-sm-4 text-right text-sm">
+            <div class="social-mini-button">
+              <a href="#"><span class="mai-logo-facebook-f"></span></a>
+              <a href="#"><span class="mai-logo-twitter"></span></a>
+              <a href="#"><span class="mai-logo-dribbble"></span></a>
+              <a href="#"><span class="mai-logo-instagram"></span></a>
+            </div>
+          </div>
+        </div> <!-- .row -->
+      </div> <!-- .container -->
+    </div> <!-- .topbar -->
+
+    <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
+      <div class="container">
+        <a class="navbar-brand " href="#"><img style="height: 40px;" src="assets/img/logo.png" alt="logo-gastrack"></a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupport" aria-controls="navbarSupport" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupport">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Acceuil</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">A Propos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Compte
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li class="nav-item">
+                  <a class="nav-link" role="button" data-bs-toggle="modal" data-bs-target="#login-modal">Se connecter</a>
+                </li>
+                <li><a class="dropdown-item" href="profil.html">Mon Profil</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">deconnexion</a></li>
+              </ul>
+            </li>
+           
+            <li class="nav-item">
+              <a class="nav-link" href="#">Panier</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-primary ml-lg-3" href="#">Service de livraison</a>
+            </li>
+          </ul>
+        </div> <!-- .navbar-collapse -->
+      </div> <!-- .container -->
+    </nav>
+  </header>
+  
+ 
+
+ 
+  </div> <!-- .bg-light -->
+
+ 
+ <div class="container-fluid mb-3">
+    Ici la carte avec la liste des depots <br><br>
+    <div id="depotMap" style="height: 320px;"></div>
+ </div>
+ <div class="row row-cols-1 row-cols-md-4 row-cols-sm-1 d-flex mx-2 justify-content-start  mb-3" id="depot-list">
+    <div class="card mb-3 mx-1" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="assets/img/b4.png" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Depot SCM</h5>
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-3 mx-1" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="assets/img/b4.png" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Depot SCM</h5>
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+ <!-- ======= Footer ======= -->
+ <footer id="footer">
+
+  <div class="footer-top">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-3 col-md-6 footer-contact">
+          <h3><img style="height: 40px;" src="assets/img/logo.png" alt="logo-gastrack"></h3>
+          <p>
+            yaounde<br>
+            University of yaounde 1<br>
+            Cameroun <br><br>
+            <strong>Service Client:</strong> +237 777777777777<br>
+            
+          </p>
+        </div>
+
+        <div class="col-lg-2 col-md-6 footer-links">
+          <h4>Liens utiles</h4>
+          <ul>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">Acceuil</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">A propos</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">Contact</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">Service de livraison</a></li>
+            
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6 footer-links">
+          <h4>Nos Service</h4>
+          <ul>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">Notre application vous offre la possibilité de localiser le dépôt le plus proche de chez vous.</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">service de livraison a domicile</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="#">d'autre service en cours.........</a></li>
+           
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-6 footer-newsletter">
+          <h4>Rester à jour</h4>
+          <p>Sois le premier à être informé en cas de pénurie ou de changement de prix.</p>
+          <form action="" method="post">
+            <input type="email" name="email"><input type="submit" value="Subscribe">
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container d-md-flex py-4">
+
+    <div class="me-md-auto text-center text-md-start">
+      <div class="copyright">
+        &copy; Copyright <strong><span>GasTrack</span></strong>. 2024
+      </div>
+
+    </div>
+  </div>
+  
+</footer><!-- End Footer -->
+
+<script src="assets/js/jquery-3.7.0.js"></script>
+
+<script src="assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="assets/vendor/owl-carousel/js/owl.carousel.min.js"></script>
+
+<script src="assets/vendor/wow/wow.min.js"></script>
+
+<script src="assets/js/theme.js"></script>
+<script src="/static/leaflet/leaflet.js"></script>
+<script src="assets/js/depotMap.js"></script>
+  
+</body>
+</html>

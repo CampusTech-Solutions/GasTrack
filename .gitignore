@@ -3,4 +3,6 @@ app/db.sqlite3
 app/*/__pycache__/
 env/
 app/geoip/
-Frontend/admin
+static/
+Frontend/GasStoreDashboard
+

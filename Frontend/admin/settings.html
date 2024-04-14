@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>GasTrack Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="assets/vendors/jvectormap/jquery-jvectormap.css">
+    <link rel="stylesheet" href="assets/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="assets/vendors/owl-carousel-2/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/vendors/owl-carousel-2/owl.theme.default.min.css">
+
+    <link rel="stylesheet" href="assets/vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+    
+    <!-- Plus -->
+    <link href="assets/vendors/simple-datatables/style.css" rel="stylesheet">
+
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" />
+  </head>
+  <body>
+    <div class="container-scroller">
+
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+          <a class="sidebar-brand brand-logo" href="index.html"><img height="200px" src="assets/images/logo.png" alt="logo" /></a>
+         
+        </div>
+        <ul class="nav">
+          <li class="nav-item profile">
+            <div class="profile-desc">
+              <div class="profile-pic">
+                <div class="count-indicator">
+                  <img class="img-xs rounded-circle " src="assets/images/favicon.png" alt="">
+                  <span class="count bg-success"></span>
+                </div>
+                <div class="profile-name">
+                  <h5 class="mb-0 font-weight-normal">admin</h5>
+                  <span>CampusTech Solutions</span>
+                </div>
+              </div>
+              <a href="#" id="profile-dropdown" data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+              <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
+                <a href="settings.html" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-settings text-primary"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">parametre de compte</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item nav-category">
+            <span class="nav-link">Navigation</span>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="index.html">
+              <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+              </span>
+              <span class="menu-title">Tableau de bord</span>
+            </a>
+          </li>
+  
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="deposit-manager.html">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title"  style="overflow: hidden;">Gestionnaires de dépôt</span>
+            </a>
+          </li>
+
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="deposit.html">
+              <span class="menu-icon">
+                <i class="mdi mdi-arrow-down"></i>
+              </span>
+              <span class="menu-title">Dépôts de gaz</span>
+            </a>
+          </li>
+
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="users-list.html">
+              <span class="menu-icon">
+                <i class="mdi mdi-face"></i>
+              </span>
+              <span class="menu-title">Liste des utilisateurs</span>
+            </a>
+          </li>
+
+          <li class="nav-item menu-items">
+
+        </ul>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar p-0 fixed-top d-flex flex-row">
+         
+          <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+              <span class="mdi mdi-menu"></span>
+            </button>
+            <ul class="navbar-nav w-100">
+              <li class="nav-item w-100">
+                <h1 class="text-center">GasTrack - Admin</h1>
+              </li>
+            </ul>
+            <ul class="navbar-nav navbar-nav-right">
+           
+              <li class="nav-item dropdown border-left">
+                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                  <i class="mdi mdi-bell"></i>
+                  <span class="count bg-danger"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                  <h6 class="p-3 mb-0">Notifications</h6>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-calendar text-success"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Event today</p>
+                      <p class="text-muted ellipsis mb-0"> Just a reminder that you have an event today </p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-settings text-danger"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Settings</p>
+                      <p class="text-muted ellipsis mb-0"> Update dashboard </p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-link-variant text-warning"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Launch Admin</p>
+                      <p class="text-muted ellipsis mb-0"> New admin wow! </p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <p class="p-3 mb-0 text-center">See all notifications</p>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
+                  <div class="navbar-profile">
+                    <img class="img-xs rounded-circle" src="assets/images/favicon.png" alt="">
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name">admin</p>
+                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                  </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+                  <h6 class="p-3 mb-0">Profile</h6>
+                  <div class="dropdown-divider"></div>
+                  
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-logout text-danger"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Déconnexion</p>
+                    </div>
+                  </a>
+    
+                </div>
+              </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-format-line-spacing"></span>
+            </button>
+          </div>
+        </nav>
+
+
+
+        <!-- partial -->
+        <div class="main-panel">
+          <section class="section profile">
+              <div class="row">
+                <div class="col-xl-4" style="margin-top: 35px;">
+  
+                  <div class="card">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+  
+                      <img src="assets/images/logo.png" alt="Profile" class="mb-4">
+                      
+                      <h3>Nom de l'admin</h3>
+                      <h4>Administrateur</h4>
+                      <div class="social-links mt-3">
+                        <a href="#" class="twitter"><i class="mdi mdi-twitter"></i></a>
+                        <a href="#" class="facebook"><i class="mdi mdi-facebook"></i></a>
+                        <a href="#" class="instagram"><i class="mdi mdi-instagram"></i></a>
+                        <a href="#" class="linkedin"><i class="mdi mdi-linkedin"></i></a>
+                      </div>
+                    </div>
+                  </div>
+  
+                </div>
+  
+                <div class="col-xl-8">
+  
+                  <div class="card">
+                    <div class="card-body pt-3">
+                      <!-- Bordered Tabs -->
+                      <ul class="nav nav-tabs nav-tabs-bordered">
+  
+                        <li class="nav-item">
+                          <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Aperçu</button>
+                        </li>
+  
+                        <li class="nav-item">
+                          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Modifier le profil</button>
+                        </li>
+  
+                        <li class="nav-item">
+                          <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Changer le mot de passe</button>
+                        </li>
+  
+                      </ul>
+                      <div class="tab-content pt-2">
+  
+                        <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                          <h5 class="card-title">A propos</h5>
+                          <p class="small fst-italic">Administrateur de l'application GasTrack</p>
+  
+                          <h5 class="card-title">Détails du profil</h5>
+                          
+                          <div class="row">
+                            <div class="col-lg-4 col-md-4 label font-weight-bold text-primary">Nom d'utilisateur</div>
+                            <div class="col-lg-8 col-md-8">Nom de l'admin</div>
+                          </div><br>
+
+                          <div class="row">
+                            <div class="col-lg-4 col-md-4 label font-weight-bold text-primary">Email</div>
+                            <div class="col-lg-8 col-md-8">Email de l'admin</div>
+                          </div><br>
+  
+                          <div class="row">
+                            <div class="col-lg-4 col-md-4 label font-weight-bold text-primary">Compagnie</div>
+                            <div class="col-lg-8 col-md-8">CampusTech Solutions</div>
+                          </div><br>
+
+                          <div class="row">
+                            <div class="col-lg-4 col-md-4 label font-weight-bold text-primary">Profession</div>
+                            <div class="col-lg-8 col-md-8">Programmeur</div>
+                          </div><br>
+
+                          <div class="row">
+                            <div class="col-lg-4 col-md-4 label font-weight-bold text-primary">Pays</div>
+                            <div class="col-lg-8 col-md-8">Cameroun</div>
+                          </div><br>
+                          
+                          <div class="row">
+                            <div class="col-lg-4 col-md-4 label font-weight-bold text-primary">Adresse</div>
+                            <div class="col-lg-8 col-md-8">XXXXX - Yaoundé</div>
+                          </div><br>
+
+                          <div class="row">
+                            <div class="col-lg-4 col-md-4 label font-weight-bold text-primary">Téléphone</div>
+                            <div class="col-lg-8 col-md-8">(+237) 690 000 000</div>
+                          </div>
+  
+                        </div>
+  
+                        <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+  
+                          <!-- Profile Edit Form -->
+                          <form id="edit-profile-form">
+                            <div class="form-group row">
+                              <label for="username" class="col-sm-3 col-form-label">Nom d'utilisateur</label>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control" name="username" id="username" placeholder="Nom d'utilisateur">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="email" class="col-sm-3 col-form-label">Email</label>
+                              <div class="col-sm-9">
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="phone_No" class="col-sm-3 col-form-label">N° Téléphone</label>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control" name="phone_No" id="phone_No" placeholder="N° Téléphone">
+                              </div>
+                            </div>
+
+                            <div class="text-center">
+                              <button type="submit" class="btn btn-primary">Sauvegarder les changements</button>
+                            </div>
+                          </form><!-- End Profile Edit Form -->
+  
+                        </div>
+  
+                        <div class="tab-pane fade pt-3" id="profile-change-password">
+                          <!-- Change Password Form -->
+                          <form id="edit-pwd-form">
+  
+                            <div class="form-group row">
+                              <label for="currentPassword" class="col-sm-3 col-form-label">Mot de passe actuel</label>
+                              <div class="col-sm-9">
+                                <input type="password" class="form-control" name="currentPassword" id="currentPassword" placeholder="Mot de passe actuel">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="newPassword" class="col-sm-3 col-form-label">Nouveau mot de passe</label>
+                              <div class="col-sm-9">
+                                <input type="password" class="form-control" name="newPassword" id="newPassword" placeholder="Nouveau mot de passe">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="confirmNewPassword" class="col-sm-3 col-form-label">Confirmer le nouveau mot de passe</label>
+                              <div class="col-sm-9">
+                                <input type="password" class="form-control" name="confirmNewPassword" id="confirmNewPassword" placeholder="Confirmer le nouveau mot de passe">
+                              </div>
+                            </div>
+  
+                            <div class="text-center">
+                              <button type="submit" class="btn btn-primary">Changer le mot de passe</button>
+                            </div>
+                          </form><!-- End Change Password Form -->
+  
+                        </div>
+  
+                      </div><!-- End Bordered Tabs -->
+  
+                    </div>
+                  </div>
+  
+                </div>
+              </div>
+          </section>
+        </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+
+    <!-- plugins:js -->
+    <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="assets/vendors/chart.js/Chart.min.js"></script>
+    <script src="assets/vendors/progressbar.js/progressbar.min.js"></script>
+    <script src="assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
+    <script src="assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="assets/vendors/owl-carousel-2/owl.carousel.min.js"></script>
+    <script src="assets/js/jquery.cookie.js" type="text/javascript"></script>
+
+    <script src="assets/vendors/select2/select2.min.js"></script>
+    <script src="assets/vendors/typeahead.js/typeahead.bundle.min.js"></script>
+    
+    <!-- End plugin js for this page -->
+
+    <!-- Plus -->
+    <script src="assets/vendors/simple-datatables/simple-datatables.js"></script>
+    <script src="assets/vendors/tinymce/tinymce.min.js"></script>
+    <script src="assets/vendors/niceadmin/main.js"></script>
+    <!-- End Plus -->
+
+    <!-- inject:js -->
+    <script src="assets/js/off-canvas.js"></script>
+    <script src="assets/js/hoverable-collapse.js"></script>
+    <script src="assets/js/misc.js"></script>
+    <script src="assets/js/settings.js"></script>
+    <script src="assets/js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/typeahead.js"></script>
+    <script src="assets/js/select2.js"></script>
+    <!-- End custom js for this page -->
+  </body>
+</html>
