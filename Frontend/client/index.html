@@ -219,69 +219,82 @@
       </div>
     </div>
   </div>
-  <div class="modal  " id="login-modal" tabindex="-1" aria-labelledby="login-modal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered w-25" >
-      <div class="modal-content  ">
-        <div class="modal-header">
-          <div class="h4" >
-            Login
-          </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-         <form  id="login-form" class="text-center">
-          <div class="mb-3">
-            <label for="username">Username</label><br>
-            <input type="text" id="login-username" placeholder="username">
-          </div>
-        
-          <div class="mb-3">
-            <label for="password">Password</label><br>
-            <input type="password"  id="login-password" placeholder="*********">
-          </div>
-          <div class="modal-footer justify-content-center">
-            <input type="submit" class="btn btn-primary" id="login-btn" value="login">
-            <a role="button" data-bs-toggle="modal" data-bs-target="#signup-modal">don't yet have an account ? signup
-            </a>
-          </div>
-         </form>
-        </div>
-        
+
+  <div class="modal fade" id="login-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <!-- Login Form -->
+          <form  id="login-form">
+            <div class="modal-header">
+              <h5 class="modal-title">Login </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                  <label for="login-username">Username<span class="text-danger">*</span></label>
+                  <input type="text" name="username" class="form-control" id="login-username" placeholder="Enter Username">
+              </div>
+  
+              <div class="mb-3">
+                  <label for="login-password">Password<span class="text-danger">*</span></label>
+                  <input type="password" name="password" class="form-control" id="login-password" placeholder="Enter Password">
+              </div>
+              <div class="mb-3">
+                  <input class="form-check-input mx-1" type="checkbox" value="" id="f-remember" required>
+                  <label class="form-check-label mx-4" for="f-remember">Remember Me</label>
+                  <a href="reset-password.html" class="float-end">Forgot Password</a> 
+              </div>
+            </div>
+            <div class="modal-footer pt-4">                  
+              <input type="submit" id="login-btn" class="btn btn-success mx-auto w-100" value="Login">
+            </div>
+            <p class="text-center">Not yet account, <a  role="button" data-bs-toggle="modal" data-bs-target="#signup-modal">Signup</a></p> 
+        </form>
       </div>
     </div>
   </div>
+ 
 
-  <div class="modal  " id="signup-modal" tabindex="-1" aria-labelledby="signup-modal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered w-25" >
-      <div class="modal-content  ">
-        <div class="modal-header">
-          <div class="h4" >
-            Signup
-          </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-         <form  id="signup-form" class="text-center">
-          <div class="mb-3">
-            <label for="username">Username</label><br>
-            <input type="text" id="username" placeholder="username">
-          </div>
-          <div class="mb-3">
-            <label for="email">Email</label><br>
-            <input type="email" id="email" placeholder="user@gaztrack.com">
-          </div>
-          <div class="mb-3">
-            <label for="password">Password</label><br>
-            <input type="password"  id="password" placeholder="*********">
-          </div>
-          <div class="modal-footer justify-content-center">
-            <input type="button" class="btn btn-primary" data-bs-dismiss="modal" value="signup">
-            <a role="button" data-bs-toggle="modal" data-bs-target="#login-modal">Already have an account ? login
-            </a>
-          </div>
-         </form>
-        </div>
-        
+  <div class="modal fade" id="signup-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <!-- Login Form -->
+          <form id="signup-form">
+            <div class="modal-header">
+              <h5 class="modal-title">SignUp </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                  <label for="signup-username">Username<span class="text-danger">*</span></label>
+                  <input type="text" name="username" class="form-control" id="signup-username" placeholder="Enter Username">
+              </div>
+              <div class="mb-3">
+                <label for="signup-email">Email<span class="text-danger">*</span></label>
+                <input type="text" name="email" class="form-control" id="signup-email" placeholder="Enter Email">
+            </div>
+              <div class="mb-3">
+                  <label for="signup-password">Password<span class="text-danger">*</span></label>
+                  <input type="password" name="password" class="form-control" id="signup-password" placeholder="Enter Password">
+              </div>
+              <div class="mb-3">
+                <label for="signup-cni">CNI<span class="text-danger">*</span></label>
+                <input type="text" name="cni" class="form-control" id="signup-cni" >
+            </div>
+              <div class="mb-3">
+                <label for="signup-tel">Telephone<span class="text-danger">*</span></label>
+                <input type="tel" name="tel" class="form-control" id="signup-tel" >
+            </div>
+              <div class="mb-3">
+                  <input class="form-check-input mx-1" type="checkbox" value="" id="remember" required>
+                  <label class="form-check-label mx-4" for="remember">Remember Me</label>
+              </div>
+            </div>
+            <div class="modal-footer pt-4">                  
+              <input type="submit" id="signup-btn" class="btn btn-success mx-auto w-100" value="SignUp">
+            </div>
+            <p class="text-center">Already have an account ? <a data-bs-toggle="modal" data-bs-target="#login-modal">Login</a></p> 
+        </form>
       </div>
     </div>
   </div>
