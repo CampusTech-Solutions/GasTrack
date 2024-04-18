@@ -6,7 +6,7 @@ declare var userMap : any;
 declare var markerU : any;
 
 
-var web_url: string = "127.0.0.1/api";
+var web_url: string = window.location.host+"/api";
 
 var parseObject  = function (array) {
     let arr = {}

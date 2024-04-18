@@ -1,4 +1,4 @@
-var web_url = "127.0.0.1/api";
+var web_url = window.location.host + "/api";
 var parseObject = function (array) {
     let arr = {};
     let dat = [...array].map(elt => {
