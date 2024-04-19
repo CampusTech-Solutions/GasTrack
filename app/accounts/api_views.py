@@ -308,6 +308,7 @@ class SignUpViewSet(viewsets.ModelViewSet):
                     "userId": user.pk,
                     "username": user.username,
                     "email": user.email,
+                    "admin": user.is_superuser
                 },
             }
             

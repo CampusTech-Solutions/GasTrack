@@ -1,4 +1,4 @@
-var web_url = "127.0.0.1:8000";
+var web_url = "127.0.0.1/api";
 var parseObject = function (array) {
     let arr = {};
     let dat = [...array].map(elt => {
@@ -84,7 +84,7 @@ class User {
                     e.preventDefault();
                     alert("OK!");
                     let coder = this.getCode().trim();
-                    if (coder.length == 8 && href == `http://${web_url}/client/reset-password.html`) {
+                    if (coder.length == 8 && href == `http://${web_url}/reset-password.html`) {
                         if (coder == data.code) {
                             alert("pass");
                             $('#password-container').empty();
@@ -114,7 +114,7 @@ class User {
                                         success: (data) => {
                                             console.log(data);
                                             alert("Mot de passe reinitialiser avec success !!");
-                                            window.location.href = `http://${web_url}/client/profil.html`;
+                                            window.location.href = `http://${web_url}/profil.html`;
                                         },
                                         error: (error) => {
                                             console.log(error);
@@ -174,13 +174,13 @@ class User {
             });
             console.log({ "Données": data });
             $.ajax({
-                url: `http://${web_url}/accounts/client/login/`,
+                url: `http://${web_url}/accounts/login/`,
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 data: data,
                 headers: {
                     "X-Requested-With": "XMLHttpRequest",
-                    "X-CSRFToken": getCookie("csrftoken"), // don't forget to include the 'getCookie' function
+                    "X-CSRFToken": getCookie("csrftoken"),
                     "access-control-allow-origin": "*",
                     "vary": "Origin",
                 },
@@ -198,6 +198,46 @@ class User {
                 },
                 error: (error) => {
                     $("#login-btn").removeAttr("disabled");
+                    console.log(error);
+                }
+            });
+        });
+    }
+    static signup() {
+        $("#signup-form").on("submit", function (event) {
+            event.preventDefault();
+            $("#signup-btn").attr("disabled", "");
+            let data = JSON.stringify({
+                "username": $("#signup-username").val(),
+                "email": $("#signup-email").val(),
+                "password": $("#signup-password").val()
+            });
+            console.log({ "Données": data });
+            $.ajax({
+                url: `http://${web_url}/accounts/signup/`,
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                data: data,
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),
+                    "access-control-allow-origin": "*",
+                    "vary": "Origin",
+                },
+                success: (data) => {
+                    window.localStorage.clear();
+                    console.log(data);
+                    window.localStorage.setItem("Token", data.data.Token);
+                    window.localStorage.setItem("UserId", data.data.userId);
+                    window.localStorage.setItem("Username", data.data.username);
+                    window.localStorage.setItem("Email", data.data.email);
+                    window.localStorage.setItem("Admin", data.data.admin);
+                    $("#signup-btn").removeAttr("disabled");
+                    $("#signup-modal").modal("hide");
+                    console.log({ "Données": data });
+                },
+                error: (error) => {
+                    $("#signup-btn").removeAttr("disabled");
                     console.log(error);
                 }
             });
@@ -232,13 +272,14 @@ class User {
     }
 }
 User.login();
+User.signup();
 let id = window.localStorage.getItem('UserId') || '1';
 let username = window.localStorage.getItem("Username");
 let email = window.localStorage.getItem("Email");
 let user = new User(id, username, email, null, null, null);
 user.fetchUser();
 $('#update-info').on('click', user.update);
-if (location.href == `http://${web_url}/client/reset-password.html`) {
+if (location.href == `http://${web_url}/reset-password.html`) {
     setTimeout(() => {
         user.passwordReset();
     }, 200);
