@@ -73,6 +73,52 @@
     background-color: red;
 }
 
+#login-form-back
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1100;
+    background-color: rgba(0, 0, 0, 0.596);
+}
+
+#login-form-container
+{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 40%;
+    z-index: 1200;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+}
+
+#close-login-form
+{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    opacity: 0.5;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+#close-login-form:hover
+{
+    opacity: 1;
+    transform: scale(1.08);
+}
+
+@media all and (max-width: 768px)
+{
+    #login-form-container
+    {
+        width: 70%;
+    }
+}
+
 @media all and (max-width: 512px)
 {
     .datatable-header
@@ -84,5 +130,10 @@
     .search-box
     {
         margin-top: 15px;
+    }
+
+    #login-form-container
+    {
+        width: 90%;
     }
 }

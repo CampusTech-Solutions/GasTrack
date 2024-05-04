@@ -20,11 +20,6 @@ $(function(){
     {
         displayAttachedItem(i);
     }
-
-    $(`#login-form-back`).hide();
-    $(`#login-form-container`).hide();
-    hideLoginForm();
-    showLoginForm();
 })();
 
 function displayAttachedItem(i)
@@ -43,25 +38,5 @@ function displayAttachedItem(i)
         $("html, body").animate({
             scrollTop: $(`#own-attach-elem${i}`).offset().top - 100
         });
-    });
-}
-
-function hideLoginForm()
-{
-    $(`#close-login-form`).on("click", (e) => {
-        $(`#login-form-container`).slideUp();
-        setTimeout(() => {
-            $(`#login-form-back`).hide();
-        }, 500);
-    });
-}
-
-function showLoginForm()
-{
-    $(`#open-login-form`).on("click", (e) => {
-        $(`#login-form-back`).show();
-        setTimeout(() => {
-            $(`#login-form-container`).slideDown();
-        }, 500);
     });
 }

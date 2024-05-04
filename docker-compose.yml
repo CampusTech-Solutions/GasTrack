@@ -42,6 +42,7 @@ services:
     volumes:
         - ./Frontend/client/:/usr/share/nginx/html/
         - ./Frontend/GasStoreDashboard/:/usr/share/nginx/html/store/
+        - ./Frontend/admin/:/usr/share/nginx/html/admin/
         - ./app/static/:/usr/share/nginx/html/static/
         - ./app/resources/:/usr/share/nginx/html/media/
        
