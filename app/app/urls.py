@@ -24,6 +24,7 @@ urlpatterns = [
     path("accounts/",include("accounts.urls")),
     path("commands/", include("commands.urls")),
     path("gasmanagement/",include("gazmanagement.urls")),
+    path("storedashboard/",include("storedashboard.urls")),
 ]
 
 if settings.DEBUG:

@@ -236,54 +236,61 @@ class SalesConsumer(AsyncWebsocketConsumer):
         action = data.get('action')
 
         if action == "create":
-            sales_data = await self.create_stock_gas_bottle(message)
+            sales_data = await self.new_sale(message)
             await self.channel_layer.group_send(
                 self.group_name,
                 {"type": "send.data", "data": sales_data}
             )
         elif action == "delete":
-            msg = await self.delete_stock_gas_bottle(message)
+            msg = await self.cancel_sale(message)
             await self.channel_layer.group_send(
                 self.group_name,
                 {"type": "send.data", "data": msg}
             )
         elif  action == "update":
-            msg = await self.update_stock_gas_bottle(message)
+            msg = await self.update_sale(message)
             await self.channel_layer.group_send(
                 self.group_name,
                 {"type": "send.data", "data": msg}
             )
 
     @database_sync_to_async
-    def create_stock_gas_bottle(self, message):
+    def new_sale(self, message):
         try:
-            sales = Sales.objects.create(bottle_id=message.pop("bottle"), stock_id=message.pop("stock"), **message)
+            serializer = SalesSerializer(data=message)
+            serializer.is_valid(raise_exception=True)
+            sales = serializer.save()
             sales_data = SalesSerializer(sales)
             return sales_data.data
-        except:
-            return {"error": "error creating gas bottle's stock..."}
+        except Exception as e:
+            return {"error": str(e)}
     
     @database_sync_to_async
-    def update_stock_gas_bottle(self, message):
+    def update_sale(self, message):
         try:
             id = message.pop("id")
-            Bool = Sales.objects.filter(id=id).update(**message)
-            sales = Sales.objects.get(id=id)
-            sales_data = SalesSerializer(sales)
-            return sales_data.data
-        except:
-            return {"error": "error updating gas bottle's stock..."}
+            sale = Sales.objects.get(id=id)
+            sale.cancel()
+            serializer = SalesSerializer(data=message, partial_update=True)
+            serializer.is_valid(raise_exception=True)
+            sale = serializer.save()
+            sale_data = SalesSerializer(sale)
+            return sale_data.data
+        except Exception as e:
+            return {"error": str(e)}
 
     @database_sync_to_async
-    def delete_stock_gas_bottle(self, message):
+    def cancel_sale(self, message):
         try:
             if isinstance(message, int):
-                Sales.objects.get(id=message).delete()
+                Sales.objects.get(id=message).cancel()
             else:
-                Sales.objects.filter(id__in=message).delete()
-            return {"message":"deletion successful !"}
+                s_list = Sales.objects.filter(id__in=message)
+                for s in s_list:
+                    s.cancel()
+            return {"message":"Cancel successful !"}
         except Exception as e:
-            return {"error":"error deleting gas bottle's stock..."}
+            return {"error":"error cancelling this sale..."}
 
     async def send_data(self, event):
         sales_data = event["data"]
@@ -308,54 +315,61 @@ class EntriesConsumer(AsyncWebsocketConsumer):
         action = data.get('action')
 
         if action == "create":
-            entries_data = await self.create_stock_gas_bottle(message)
+            entries_data = await self.new_entry(message)
             await self.channel_layer.group_send(
                 self.group_name,
                 {"type": "send.data", "data": entries_data}
             )
         elif action == "delete":
-            msg = await self.delete_stock_gas_bottle(message)
+            msg = await self.cancel_entry(message)
             await self.channel_layer.group_send(
                 self.group_name,
                 {"type": "send.data", "data": msg}
             )
         elif  action == "update":
-            msg = await self.update_stock_gas_bottle(message)
+            msg = await self.update_entry(message)
             await self.channel_layer.group_send(
                 self.group_name,
                 {"type": "send.data", "data": msg}
             )
 
     @database_sync_to_async
-    def create_stock_gas_bottle(self, message):
-        # try:
-        entries = Entries.objects.create(bottle_id=message.pop("bottle"), stock_id=message.pop("stock"), **message)
-        entries_data = EntriesSerializer(entries)
-        return entries_data.data
-        # except:
-        #     return {"error": "error creating new entriy..."}
-    
-    @database_sync_to_async
-    def update_stock_gas_bottle(self, message):
+    def new_entry(self, message):
         try:
-            id = message.pop("id")
-            Bool = Entries.objects.filter(id=id).update(**message)
-            entries = Entries.objects.get(id=id)
+            serializer = EntriesSerializer(data=message)
+            serializer.is_valid(raise_exception=True)
+            entries = serializer.save()
             entries_data = EntriesSerializer(entries)
             return entries_data.data
-        except:
-            return {"error": "error updating gas bottle's stock..."}
+        except Exception as e:
+            return {"error": str(e)}
+    
+    @database_sync_to_async
+    def update_entry(self, message):
+        try:
+            id = message.pop("id")
+            entry = Entries.objects.get(id=id)
+            entry.cancel()
+            serializer = EntriesSerializer(data=message, partial_update=True)
+            serializer.is_valid(raise_exception=True)
+            entry = serializer.save()
+            entry_data = EntriesSerializer(entry)
+            return entry_data.data
+        except Exception as e:
+            return {"error": str(e)}
 
     @database_sync_to_async
-    def delete_stock_gas_bottle(self, message):
+    def cancel_entry(self, message):
         try:
             if isinstance(message, int):
-                Entries.objects.get(id=message).delete()
+                Entries.objects.get(id=message).cancel()
             else:
-                Entries.objects.filter(id__in=message).delete()
-            return {"message":"deletion successful !"}
+                p_list = Entries.objects.filter(id__in=message)
+                for p in p_list:
+                    p.cancel()
+            return {"message":"Cancel successful !"}
         except Exception as e:
-            return {"error":"error deleting gas bottle's stock..."}
+            return {"error":"error cancelling purchase..."}
 
     async def send_data(self, event):
         entries_data = event["data"]

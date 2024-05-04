@@ -22,7 +22,6 @@ class ClientFactory(UserFactory):
     code = factory.Sequence(lambda n: fake.random_number(digits=6))
 
 
-
 class GestStoreFactory(ClientFactory):
     class Meta:
         model = GestStore
@@ -30,16 +29,14 @@ class GestStoreFactory(ClientFactory):
     matricule = factory.Sequence(lambda n: fake.random_number(digits=8))
 
 
-
 class GasStoreFactory(DjangoModelFactory):
     class Meta:
         model = GasStore
-    
+
     name = factory.Sequence(lambda n: fake.company())
     manager = factory.SubFactory(GestStoreFactory)
     store_status = factory.Sequence(lambda n: fake.random_element(elements=(True, False)))
     infos = factory.Sequence(lambda n: fake.sentence(nb_words=10))
-
 
 
 class StockFactory(DjangoModelFactory):
@@ -56,7 +53,7 @@ class GasBrandFactory(DjangoModelFactory):
         model = GasBrand
 
     name = factory.Sequence(lambda n: fake.company()+" Gas")
-    compagny = factory.Sequence(lambda n: fake.company())
+    company = factory.Sequence(lambda n: fake.company())
 
 
 class GasBottleFactory(DjangoModelFactory):
@@ -67,16 +64,14 @@ class GasBottleFactory(DjangoModelFactory):
     weight = factory.Sequence(lambda n: fake.random_element(elements=(6, 12.5, 25)))
 
 
-
 class EntriesFactory(DjangoModelFactory):
     class Meta:
         model = Entries
-    
+
     stock = factory.SubFactory(StockFactory)
     bottle = factory.SubFactory(GasBottleFactory)
     quantity = random.randint(1, 1000)
     unit_cost_price = random.randint(2000, 20000)
-    unit_selling_price = unit_cost_price + random.randint(500, 2500)
 
 
 def seed_database(num=5):

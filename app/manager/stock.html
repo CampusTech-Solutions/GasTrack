@@ -40,7 +40,7 @@
       }
       
       #cards-container .card{
-        margin-right: 1.25em;
+        /* margin-right: 1.25em; */
         /* width: 90%; */
         /* padding: 0.25em; */
       }
@@ -70,9 +70,9 @@
       th {
         background-color: #12151e;
         text-transform: uppercase;
-        font-size: .95em;
+        font-size: 1em;
         position: sticky;
-        top: 0;
+        top: 0px;
       }
 
       select option {
@@ -95,16 +95,23 @@
         <ul class="nav">
           <li class="nav-item profile">
             <div class="profile-desc">
-              <div class="profile-pic">
-                <div class="count-indicator">
-                  <img class="img-xs rounded-circle " src="assets/images/faces/f1.png" alt="">
-                  <span class="count bg-success"></span>
-                </div>
-                <div class="profile-name">
-                  <h5 class="mb-0 font-weight-normal">piko</h5>
-                  <span>Foka Distribtion</span>
-                </div>
+              <div class="profile-pic" id="profile-pic">
+                
               </div>
+              <script>
+                window.addEventListener('load', function(e){
+                  $('#profile-pic').html(`
+                  <div class="count-indicator">
+                  <img class="img-xs rounded-circle " src=${getCookie('storeimage')} alt="">
+                  <span class="count bg-success"></span>
+                  </div>
+                  <div class="profile-name">
+                    <h5 class="mb-0 font-weight-normal">${getCookie('username')}</h5>
+                    <span>${getCookie('storename')}</span>
+                  </div>
+                  `);
+                });
+              </script>
               <a href="#" id="profile-dropdown" data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
               <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
                 <a href="#" class="dropdown-item preview-item">
@@ -286,11 +293,18 @@
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link" id="profileDropdown" href="#" data-bs-toggle="dropdown">
-                  <div class="navbar-profile">
-                    <img class="img-xs rounded-circle" src="assets/images/faces/f1.png" alt="">
-                    <p class="mb-0 d-none d-sm-block navbar-profile-name">piko</p>
-                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                  <div class="navbar-profile" id="navbar-profile">
+                    
                   </div>
+                  <script>
+                    window.addEventListener('load', function(e){
+                      $('#navbar-profile').html(`
+                      <img class="img-xs rounded-circle" src=${getCookie('storeimage')} alt="">
+                      <p class="mb-0 d-none d-sm-block navbar-profile-name">${getCookie('username')}</p>
+                      <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                      `);
+                    });
+                  </script>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
                   <h6 class="p-3 mb-0">Profile</h6>

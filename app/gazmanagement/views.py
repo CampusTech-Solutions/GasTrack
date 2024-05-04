@@ -56,6 +56,34 @@ class GasBottleViewSet(viewsets.ModelViewSet):
 
         return JsonResponse({"data" : bottle_slz.data}, status=201)
 
+class StockGasBottleViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
+    lookup_field = 'id'
+    serializer_class = StockGasBottleSerializer
+    queryset = StockGasBottle.objects.all()
+
+    def list(self, request, id=None, *args, **kwargs):
+        if id:
+            storestocks = Stock.objects.filter(store_id=id).values_list('id', flat=True)
+            sgbs = StockGasBottle.objects.filter(stock_id__in=storestocks)
+            sgb_slz = StockGasBottleSerializer(sgbs, many=True)
+            return JsonResponse({"results" : sgb_slz.data}, status=200)
+        else:
+            return super().list(request, *args, **kwargs)
+
+    # def create(self, request, *args, **kwargs):
+
+    #     try:
+    #         gasbottle_serializer = self.get_serializer(data=request.data)
+    #         gasbottle_serializer.is_valid(raise_exception=True)
+    #         gasbottle = gasbottle_serializer.save()
+    #     except Exception as error:
+    #         return JsonResponse({"error": str(error)}, status=500)
+        
+    #     bottle_slz = GasBottleSerializer(gasbottle)
+
+    #     return JsonResponse({"data" : bottle_slz.data}, status=201)
+
 
 class StockViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
@@ -75,6 +103,16 @@ class StockViewSet(viewsets.ModelViewSet):
 
         return JsonResponse({"data" : stock_slz.data}, status=201)
 
+    def retrieve(self, request, id=None):
+        stocks = Stock.objects.filter(store_id=id)
+
+        if stocks:
+            stocks_slz = StockSerializer(stocks, many=True)
+            return JsonResponse({"data" : stocks_slz.data}, status=200)
+        else:
+            return JsonResponse({"error" : "no stock found"}, status=404)
+
+
 
 class SalesViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
@@ -93,6 +131,16 @@ class SalesViewSet(viewsets.ModelViewSet):
         sales_slz = SalesSerializer(sales)
 
         return JsonResponse({"data" : sales_slz.data}, status=201)
+    
+    def list(self, request, id=None, *args, **kwargs):
+        if id:
+            storestocks = Stock.objects.filter(store_id=id).values_list('id', flat=True)
+            sgbs = StockGasBottle.objects.filter(stock_id__in=storestocks).values_list('id', flat=True)
+            sales = Sales.objects.filter(stockgasbottle_id__in=sgbs)
+            sales_slz = SalesSerializer(sales, many=True)
+            return JsonResponse({"results" : sales_slz.data}, status=200)
+        else:
+            return super().list(request, *args, **kwargs)
 
 class EntriesViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
@@ -111,6 +159,16 @@ class EntriesViewSet(viewsets.ModelViewSet):
         entries_slz = EntriesSerializer(entries)
 
         return JsonResponse({"data" : entries_slz.data}, status=201)
+    
+    def list(self, request, id=None, *args, **kwargs):
+        if id:
+            storestocks = Stock.objects.filter(store_id=id).values_list('id', flat=True)
+            entries = Entries.objects.filter(stock_id__in=storestocks)
+            entries_slz = EntriesSerializer(entries, many=True)
+            return JsonResponse({"results" : entries_slz.data}, status=200)
+        else:
+            return super().list(request, *args, **kwargs)
+
 
 
 

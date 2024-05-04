@@ -1,12 +1,28 @@
+window.addEventListener('load', function(e){
+  var token = getCookie("csrftoken");
+  if (token === null){
+    window.location.href = "login.html";
+  }
+  else{
+    loadStoreData();
+  }
 
-const gasstore_socket = new WebSocket("/ws/gasstore/");
+
+  //toggle button
+  
+  initializeSwitchState()
+});
+
 
 function handleSwitchChange() {
   var switchElement:any = document.getElementById("toggle");
   var switchState = switchElement.checked;
+  updateStoreStatus(switchState);
+  loadPersonalInfo()
+}
 
-  // Update the cookie with the new switch state
-  alert("i'm about to send")
+const gasstore_socket = new WebSocket("ws://127.0.0.1:8000/ws/gasstore/");
+function updateStoreStatus(switchState:any){
   gasstore_socket.send(
     JSON.stringify({
         "message": {"id": `${getCookie('storeid')}`, "store_status": switchState},
@@ -15,15 +31,22 @@ function handleSwitchChange() {
   );
 }
 
-gasstore_socket.onopen = function () {
-  alert("Connected!")
-}
 gasstore_socket.onmessage = function (event) {
   const data = JSON.parse(event.data);
-  alert(event.data)
   setCookie("storestatus", data.store_status, 365);
   initializeSwitchState();
+  personalInfosRender();
+  // var name = document.getElementById("store-name")
+  // var location = document.getElementById("store-location")
+  // var infos = document.getElementById("store-infos");
+  // if (name && location && infos){
+  //   name.textContent = data.name;
+  //   location.textContent = data.location?"Aucune":data.location;
+  //   infos.textContent = data.infos;
+  // }
 }
+
+
 
 // Function to initialize the switch state based on the cookie value
 function initializeSwitchState() {

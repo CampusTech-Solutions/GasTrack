@@ -25,7 +25,7 @@ class GasStore(models.Model):
 
 class GasBrand(models.Model):
     name = models.CharField(max_length=255, null=False, unique=True)
-    compagny = models.CharField(max_length=255, null=False, unique=True)
+    company = models.CharField(max_length=255, null=False)
 
 
     def __str__(self) -> str:
@@ -41,8 +41,6 @@ class GasBottle(models.Model):
 
     def getBrand(self):
         return self.brand
-    def getPrice(self):
-        return self.price
     def getWeight(self):
         return self.weight
     
@@ -72,18 +70,14 @@ class Stock(models.Model):
     def __str__(self) -> str:
         return f"Stock : {self.name} - {self.label}"
 
-    def add_new_gas(self, bottle, quantity, supplementary_fee=0.0):
-        StockGasBottle.objects.create(stock=self, bottle=bottle, quantity=quantity, supplementary_fee=supplementary_fee)
-
-    def bottles_tcp_tsp(self):
+    def bottles_tcp(self):
         sgbs = StockGasBottle.objects.filter(stock=self)
         if (len(sgbs) != 0):
-            bottles=0; tcp=0; tsp=0
+            bottles=0; tcp=0;
             for x in sgbs:
                 bottles += x.quantity
                 tcp += x.total_cp()
-                tsp += x.total_sp()
-        return bottles, tcp, tsp
+        return bottles, tcp
 
     def get_bottles(self):
         return StockGasBottle.objects.filter(stock=self)
@@ -102,29 +96,36 @@ class StockGasBottle(models.Model):
     bottle = models.ForeignKey(GasBottle, on_delete=models.CASCADE, null=False)
     quantity = models.IntegerField(default=0)
     unit_cost_price = models.FloatField(default=0.0, null=False, blank=False)
-    unit_selling_price = models.FloatField(default=0.0, null=False, blank=False)
 
     def total_cp(self):
         return self.quantity*self.unit_cost_price
-    def total_sp(self):
-        return self.quantity*self.unit_selling_price
-    def net_gain(self):
-        return self.total_sp()-self.total_cp()
 
 
 class Sales(models.Model):
     date = models.DateField(auto_now_add=True)
-    stock = models.ForeignKey(Stock, on_delete=models.CASCADE, null=False)
-    bottle = models.ForeignKey(GasBottle, on_delete=models.CASCADE, null=False)
+    stockgasbottle = models.ForeignKey(StockGasBottle, on_delete=models.CASCADE, null=False)
     quantity = models.IntegerField(default=0)
+    unit_selling_price = models.FloatField(default=0.0, null=False, blank=False)
+
+    def cancel(self):
+        sgb = StockGasBottle.objects.get(id=self.stockgasbottle.id)
+        sgb.quantity += self.quantity
+        sgb.save()
+        self.delete()
 
 class Entries(models.Model):
     date = models.DateField(auto_now_add=True)
     stock = models.ForeignKey(Stock, on_delete=models.CASCADE, null=False)
     bottle = models.ForeignKey(GasBottle, on_delete=models.CASCADE, null=False)
-    quantity = models.IntegerField(default=0)
+    quantity = models.PositiveIntegerField(default=0)
     unit_cost_price = models.FloatField(default=0.0, null=False, blank=False)
-    unit_selling_price = models.FloatField(default=0.0, null=False, blank=False)
+
+    def cancel(self):
+        sgb = StockGasBottle.objects.filter(bottle=self.bottle,stock=self.stock,unit_cost_price=self.unit_cost_price).first()
+        if sgb:
+            sgb.quantity -= self.quantity
+            sgb.save()
+        self.delete()
 
 
 

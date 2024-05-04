@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     'faker',
     'accounts',
     'gazmanagement',
-    'commands'
+    'commands',
+    'storedashboard',
 ]
 
 MIDDLEWARE = [
@@ -111,16 +112,17 @@ DATABASES = {
         'HOST': '127.0.0.1',
         'PORT': '5432',
     },
-    #'Datawarehouse':{
-    #    'ENGINE': 'django.contrib.gis.db.backends.postgis',
-    #    'NAME': 'vente_dw',
-    #    'USER': 'postgres',
-    #    'PASSWORD': 'postgres',
-    #    'HOST': 'db',
-    #    'PORT': '5432',
-    #}
+    'storedashboard':{
+       'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'storedashboard',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
 }
 
+DATABASE_ROUTERS = ["storedashboard.database_router.StoredashboardRouter"]
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
