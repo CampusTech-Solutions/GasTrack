@@ -16,7 +16,7 @@ class Cart(models.Model):
 class Command(models.Model):
     gasBottle = models.ForeignKey(GasBottle, on_delete=models.CASCADE, related_name="command_gasbottle")
     bottleNumber = models.IntegerField()
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="command_cart")
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="command_cart",null=True)
 
     def __str__(self):
         return f"bottle : {self.gasBottle}, number : {self.bottleNumber}"

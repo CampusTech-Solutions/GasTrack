@@ -1,4 +1,4 @@
-var web_url = "127.0.0.1/api";
+var web_url = window.location.host + "/api";
 var parseObject = function (array) {
     let arr = {};
     let dat = [...array].map(elt => {
@@ -165,7 +165,7 @@ class User {
         });
     }
     static login() {
-        $("#login-form").on("submit", function (event) {
+        $("#login-btn").on("click", function (event) {
             event.preventDefault();
             $("#login-btn").attr("disabled", "");
             let data = JSON.stringify({
@@ -204,12 +204,14 @@ class User {
         });
     }
     static signup() {
-        $("#signup-form").on("submit", function (event) {
+        $("#signup-btn").on("click", function (event) {
             event.preventDefault();
             $("#signup-btn").attr("disabled", "");
             let data = JSON.stringify({
                 "username": $("#signup-username").val(),
                 "email": $("#signup-email").val(),
+                "no_cni": $("#signup-cni").val(),
+                "phone_No": $("#signup-tel").val(),
                 "password": $("#signup-password").val()
             });
             console.log({ "Données": data });

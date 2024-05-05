@@ -6,7 +6,7 @@ declare var userMap : any;
 declare var markerU : any;
 
 
-var web_url: string = "127.0.0.1/api";
+var web_url: string = window.location.host+"/api";
 
 var parseObject  = function (array) {
     let arr = {}
@@ -258,7 +258,7 @@ function getCookie(name:any):string {
 
      static login(){
         
-        $("#login-form").on("submit",
+        $("#login-btn").on("click",
           function (event) {
       event.preventDefault();
       
@@ -315,7 +315,7 @@ function getCookie(name:any):string {
 
     static signup(){
 
-      $("#signup-form").on("submit",
+      $("#signup-btn").on("click",
       function (event) {
   event.preventDefault();
   
@@ -324,6 +324,8 @@ function getCookie(name:any):string {
   let data = JSON.stringify({
      "username": $("#signup-username").val(),
      "email": $("#signup-email").val(),
+     "no_cni": $("#signup-cni").val(),
+     "phone_No": $("#signup-tel").val(),
      "password": $("#signup-password").val()
   });
   
