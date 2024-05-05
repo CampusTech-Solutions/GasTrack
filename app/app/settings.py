@@ -172,8 +172,13 @@ USE_L10N = True
 
 USE_TZ = True
 
+<<<<<<< HEAD
 CORS_ALLOWED_ORIGINS = [
 #    'http://localhost:8000',
+=======
+#CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:8000',
+>>>>>>> origin/dallas
 #    'http://127.0.0.1:8000',
 #    'http://localhost',
     'http://192.168.198.217',

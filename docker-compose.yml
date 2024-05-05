@@ -43,6 +43,7 @@ services:
         - ./Frontend/client/:/usr/share/nginx/html/
         - ./Frontend/admin/:/usr/share/nginx/html/admin/
         - ./Frontend/GasStoreDashboard/:/usr/share/nginx/html/store/
+        - ./Frontend/admin/:/usr/share/nginx/html/admin/
         - ./app/static/:/usr/share/nginx/html/static/
         - ./app/ressources/:/usr/share/nginx/html/ressources/
        

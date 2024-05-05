@@ -48,7 +48,11 @@ def get_client_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     
+<<<<<<< HEAD
     ips = ['127.0.0.1','172.20.10.2','172.18.0.5','0.0.0.0','172.20.0.5','172.20.0.1']
+=======
+    ips = ['127.0.0.1','172.20.10.2', '172.18.0.1']
+>>>>>>> origin/dallas
     if ip in ips: # Only define the IP if you are testing on localhost.
         ip = '8.8.8.8'
     return ip
