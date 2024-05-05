@@ -10,18 +10,18 @@ RUN apt-get update && apt-get install python3 gcc libc-dev -y \
 
 RUN pip install --upgrade pip
 COPY ./requirements.txt /requirements.txt
-RUN  pip install  --no-cache-dir -r /requirements.txt
+RUN  pip install -r /requirements.txt
 
 
 RUN mkdir /app
 WORKDIR /app
-#COPY ./app /app
+COPY ./app /app
 
-#EXPOSE 8000
+EXPOSE 8000
 
-#COPY ./app/start.sh .
-#RUN sed -i 's/\r$//g' /app/start.sh
-#RUN chmod +x /app/start.sh
+COPY ./app/start.sh .
+RUN sed -i 's/\r$//g' /app/start.sh
+RUN chmod +x /app/start.sh
 
 
-#ENTRYPOINT [ "/app/start.sh" ]
+ENTRYPOINT [ "/app/start.sh" ]

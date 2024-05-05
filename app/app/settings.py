@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import environ
+#from . import ip_address
+
 
 
 
@@ -50,7 +52,10 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     'corsheaders',
     'django_filters',
-    
+    'faker',
+    'accounts',
+    'gazmanagement',
+    'commands'
 ]
 
 MIDDLEWARE = [
@@ -61,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'app.urls'
@@ -88,7 +94,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [("127.0.0.1", 6379),],
+            "hosts": [("redis", 6379),],
         },
     },
 }
@@ -102,7 +108,7 @@ DATABASES = {
         'NAME': 'gaztrack',
         'USER': 'gaztrack',
         'PASSWORD': 'postgres',
-        'HOST': '127.0.0.1',
+        'HOST': 'db',
         'PORT': '5432',
     },
     #'Datawarehouse':{
@@ -145,7 +151,7 @@ REST_FRAMEWORK = {
    'DEFAULT_AUTHENTICATION_CLASSES': (
         #'rest_framework.authentication.BasicAuthentication',
        'rest_framework.authentication.SessionAuthentication',
-       #'rest_framework.authentication.TokenAuthentication',
+       'rest_framework.authentication.TokenAuthentication',
    ),
    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
    
@@ -167,12 +173,18 @@ USE_L10N = True
 USE_TZ = True
 
 #CORS_ALLOWED_ORIGINS = [
-#    'http://192.168.112.16',
+#     'http://localhost:8000',
+#    'http://127.0.0.1:8000',
+#    'http://localhost',
+#    'http://127.0.0.1',
+#    'http://0.0.0.0'
 #]
 #
 #CSRF_TRUSTED_ORIGINS = [
+#    'http://localhost:8000'
+#    'http://127.0.0.1:8000',
 #    'http://127.0.0.1',
-#    
+#    'http://localhost',
 #]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -186,15 +198,15 @@ GEOIP_PATH = os.path.join(BASE_DIR,'geoip')
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
-#AUTH_USER_MODEL = "accounts.User"
+AUTH_USER_MODEL = "accounts.Client"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
 STATIC_ROOT =  os.path.join(BASE_DIR, 'static')
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'ressources')
+MEDIA_URL = '/ressources/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -206,11 +218,16 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'manuelsokoudjou@gmail.com'
 EMAIL_HOST_PASSWORD = 'oaygyzuvrvvnxfop'
 
+
 LEAFLET_CONFIG = {
-    "DEFAULT_CENTER": (-1.94, 29.87),
+    "DEFAULT_CENTER": (7.3696495,12.3445856),
     "DEFAULT_ZOOM": 8,
     "MAX_ZOOM": 20,
     "MIN_ZOOM": 3,
     "SCALE": "both",
     "ATTRIBUTION_PREFIX": "Gaztrack API",
 }
+
+CLIENT_URL = '/client/'
+CLIENT_ROOT =  os.path.join(BASE_DIR, 'client')
+

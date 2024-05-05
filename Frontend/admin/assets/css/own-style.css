@@ -1,0 +1,139 @@
+.own-floating-btn
+{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 10000;
+    margin-bottom: 15px;
+    margin-right: 15px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 15px 15px;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.own-floating-btn-icon
+{
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.own-floating-btn-content
+{
+    font-size: 15px;
+    overflow: hidden;
+    width: 0px;
+    white-space: nowrap;
+}
+
+.own-attach-elem
+{
+    display: none;
+}
+
+.datatable-header
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    padding-bottom: 10px;
+    border-bottom: 1px gray solid;
+}
+
+.datatable-footer
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 5px 2px;
+    align-items: center;
+}
+#go-left, #go-right
+{
+    margin: 0 3px;
+}
+.search-box
+{
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 5px 10px;
+    border: solid gray 1px;
+}
+
+#pagination button.active
+{
+    background-color: red;
+}
+
+#login-form-back
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1100;
+    background-color: rgba(0, 0, 0, 0.596);
+}
+
+#login-form-container
+{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 40%;
+    z-index: 1200;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+}
+
+#close-login-form
+{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    opacity: 0.5;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+#close-login-form:hover
+{
+    opacity: 1;
+    transform: scale(1.08);
+}
+
+@media all and (max-width: 768px)
+{
+    #login-form-container
+    {
+        width: 70%;
+    }
+}
+
+@media all and (max-width: 512px)
+{
+    .datatable-header
+    {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .search-box
+    {
+        margin-top: 15px;
+    }
+
+    #login-form-container
+    {
+        width: 90%;
+    }
+}

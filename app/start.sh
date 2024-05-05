@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-if [ "$DATABASE" = "postgres" ]
+if [ "$DATABASE" = "gaztrack" ]
 then
     echo "Waiting for postgres..."
 
@@ -11,7 +11,13 @@ then
     echo "PostgreSQL started"
 fi
 echo "========================makemigrations ========================"
-python manage.py makemigrations
+python manage.py makemigrations accounts 
+
+echo "=========== make migrations gazmanagement ==========="
+python manage.py makemigrations gazmanagement
+
+echo "=========== make migrations commandes ==========="
+python manage.py makemigrations commands
 
 echo "================= migrate ====================================="
 echo "==============================================================="
