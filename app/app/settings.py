@@ -180,12 +180,12 @@ USE_TZ = True
 #    'http://0.0.0.0'
 #]
 #
-#CSRF_TRUSTED_ORIGINS = [
+CSRF_TRUSTED_ORIGINS = [
 #    'http://localhost:8000'
 #    'http://127.0.0.1',
 #    'http://192.168.198.217',
-#    'http://localhost',
-#]
+    'http://localhost',
+]
 
 CORS_ORIGIN_ALLOW_ALL = True
 CSRF_ORIGIN_ALLOW_ALL = True

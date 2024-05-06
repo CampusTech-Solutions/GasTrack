@@ -22,6 +22,17 @@ map.setView([lat, long, 100]);
 
 map.on('click', (e) => {
     marker.setLatLng(e.latlng);
+
+    var lat = (e.latlng.lat);
+    var lng = (e.latlng.lng);
+    var loc_data = {
+            "type": "Point",
+            "coordinates": [
+                lat,
+                lng
+            ]
+        };
+    window.localStorage.setItem("selected_location", JSON.stringify(loc_data));
 });
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { // Utilisez un service de tuiles, comme OpenStreetMap

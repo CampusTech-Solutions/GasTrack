@@ -7,4 +7,5 @@ venv/
 app/geoip/
 static/
 Frontend/GasStoreDashboard
+Frontend/admin/assets/ts
 

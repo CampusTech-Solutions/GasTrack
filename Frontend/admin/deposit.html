@@ -187,19 +187,34 @@
                   </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
-                  <h6 class="p-3 mb-0">Profile</h6>
+                  <h6 class="p-3 mb-0">Profil</h6>
                   <div class="dropdown-divider"></div>
                   
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-logout text-danger"></i>
+                  <div class="no-auth">
+                    <a class="open-login-form dropdown-item preview-item">
+                      <div class="preview-thumbnail">
+                        <div class="preview-icon bg-dark rounded-circle">
+                          <i class="mdi mdi-login text-success"></i>
+                        </div>
                       </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Déconnexion</p>
-                    </div>
-                  </a>
+                      <div class="preview-item-content">
+                        <p class="preview-subject mb-1">Connexion</p>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="auth">
+                    <a class="dropdown-item preview-item" id="logout-btn">
+                      <div class="preview-thumbnail">
+                        <div class="preview-icon bg-dark rounded-circle">
+                          <i class="mdi mdi-logout text-danger"></i>
+                        </div>
+                      </div>
+                      <div class="preview-item-content">
+                        <p class="preview-subject mb-1">Déconnexion</p>
+                      </div>
+                    </a>
+                  </div>
     
                 </div>
               </li>
@@ -212,6 +227,21 @@
 
 
 
+
+
+        <!-- Confirm panel -->
+        <div class="card" id="confirm-panel">
+          <div class="card-body">
+              <h4 class="card-title">Confirmer la suppression</h4>
+              <p>Etes-vous sûr de vouloir supprimer ce dépôt ? ?</p>
+
+              <div>
+                <button class="btn btn-danger" id="confirm-delete">Supprimer</button>
+                <button class="btn btn-default" id="cancel-delete">Annuler</button>
+              </div>
+          </div>
+        </div>
+        <!-- End Confirm panel -->
 
 
 
@@ -254,7 +284,9 @@
                           </div>
                           <!-- <input type="text" class="form-control" id="location" placeholder="localisation"> -->
                         </div>
-  
+                        
+                        <div id="form-error">Erreur : Veuillez remplir tous les champs avec les valeurs appropriées</div>
+                        <div id="form-success"> Dépôt ajouté avec succès </div>
                         <button type="submit" class="btn btn-primary me-2">Ajouter</button>
                       </form>
                     </div>
@@ -368,9 +400,11 @@
     <script src="assets/js/select2.js"></script>
     <!-- End custom js for this page -->
 
-    <script src="assets/js/own-main.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/leaflet-init.js"></script>
+    <script src="assets/js/scripts/own-main.js"></script>
+    <script src="assets/js/scripts/leaflet-init.js"></script>
+    <script src="assets/js/scripts/gasstore-management.js"></script>
+    <script type="module" src="assets/js/scripts/login-manager.js"></script>
+    <!--<script src="assets/js/scripts/main.js"></script>-->
 
   </body>
 </html>
