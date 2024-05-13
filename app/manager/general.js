@@ -16,7 +16,7 @@ function handleSwitchChange() {
     updateStoreStatus(switchState);
     loadPersonalInfo();
 }
-const gasstore_socket = new WebSocket("ws://127.0.0.1:8000/ws/gasstore/");
+const gasstore_socket = new WebSocket(`ws://${window.location.host}:8000/ws/gasstore/`);
 function updateStoreStatus(switchState) {
     gasstore_socket.send(JSON.stringify({
         "message": { "id": `${getCookie('storeid')}`, "store_status": switchState },

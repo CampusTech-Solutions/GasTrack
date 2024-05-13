@@ -115,7 +115,7 @@ DATABASES = {
     'storedashboard':{
        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'storedashboard',
-        'USER': 'postgres',
+        'USER': 'gaztrack',
         'PASSWORD': 'postgres',
         'HOST': '127.0.0.1',
         'PORT': '5432',

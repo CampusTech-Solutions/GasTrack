@@ -657,9 +657,9 @@ function updateSD() {
         "action": "update"
     }));
 }
-const stock_socket = new WebSocket("ws://127.0.0.1:8000/ws/stock/");
-const entries_socket = new WebSocket("ws://127.0.0.1:8000/ws/entries/");
-const sales_socket = new WebSocket("ws://127.0.0.1:8000/ws/sales/");
+const stock_socket = new WebSocket(`ws://${window.location.host}:8000/ws/stock/`);
+const entries_socket = new WebSocket(`ws://${window.location.host}:8000/ws/entries/`);
+const sales_socket = new WebSocket(`ws://${window.location.host}:8000/ws/sales/`);
 entries_socket.onmessage = function (message) {
     console.log(message);
 };

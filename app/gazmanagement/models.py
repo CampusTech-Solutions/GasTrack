@@ -43,7 +43,7 @@ class GasBottle(models.Model):
         return self.brand
     def getWeight(self):
         return self.weight
-    
+
     def setPrice(self, price):
         self.price = price
         self.save()
@@ -118,7 +118,7 @@ class Entries(models.Model):
     stock = models.ForeignKey(Stock, on_delete=models.CASCADE, null=False)
     bottle = models.ForeignKey(GasBottle, on_delete=models.CASCADE, null=False)
     quantity = models.PositiveIntegerField(default=0)
-    unit_cost_price = models.FloatField(default=0.0, null=False, blank=False)
+    unit_cost_price = models.FloatField(default=0.0)
 
     def cancel(self):
         sgb = StockGasBottle.objects.filter(bottle=self.bottle,stock=self.stock,unit_cost_price=self.unit_cost_price).first()
