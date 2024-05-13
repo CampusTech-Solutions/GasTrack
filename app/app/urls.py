@@ -20,15 +20,27 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
+<<<<<<< HEAD
     path("admin/", admin.site.urls),
     path("accounts/",include("accounts.urls")),
     path("commands/", include("commands.urls")),
     path("gasmanagement/",include("gazmanagement.urls")),
     path("storedashboard/",include("storedashboard.urls")),
+=======
+    path("api/admin/", admin.site.urls),
+    path("api/accounts/",include("accounts.urls")),
+    path("api/commands/", include("commands.urls")),
+    path("api/gasmanagement/",include("gazmanagement.urls")),
+>>>>>>> origin/dallas
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+<<<<<<< HEAD
     urlpatterns += static(settings.CLIENT_URL, document_root=settings.CLIENT_ROOT)
     urlpatterns += static(settings.MANAGER_URL, document_root=settings.MANAGER_ROOT)
 
+=======
+    #urlpatterns += static(settings.CLIENT_URL, document_root=settings.CLIENT_ROOT)
+    
+>>>>>>> origin/dallas

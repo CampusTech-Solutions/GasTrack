@@ -8,7 +8,7 @@ router = routers.DefaultRouter()
 
 router.register(r'commands', CommandViewSet)
 router.register(r'payCommands', PayCommandViewSet)
-router.register(r'baskets', BasketViewSet)
+router.register(r'carts', CartViewSet)
 
 urlpatterns = router.urls
 
