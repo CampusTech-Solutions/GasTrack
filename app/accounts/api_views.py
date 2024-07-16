@@ -48,7 +48,7 @@ def get_client_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     
-    ips = ['127.0.0.1','172.20.10.2']
+    ips = ['127.0.0.1','172.20.10.2','172.18.0.5','0.0.0.0','172.20.0.5','172.20.0.1']
     if ip in ips: # Only define the IP if you are testing on localhost.
         ip = '8.8.8.8'
     return ip
@@ -212,7 +212,7 @@ class PasswordResetViewSet(viewsets.ModelViewSet):
         
         if serializers.is_valid(): 
            serializers.save()
-           return HttpResponseRedirect(f"http://127.0.0.1:8000/accounts/password-reset-success")
+           return Response({"code" : serializers.code}, status=status.HTTP_200_OK)
         
     
     def list(self, request):
@@ -232,10 +232,11 @@ class ResetViewSet(viewsets.ModelViewSet):
         serializers = self.serializer_class(data=request.data)
         
         if serializers.is_valid(): 
-            code =  request.data["code"]
+            code =  serializers.validated_data["code"]
             
             try:
                user= Client.objects.get(code=code)
+               print(f"username = {user.username}")
                
             except Client.DoesNotExist:
                 response = {
@@ -246,7 +247,7 @@ class ResetViewSet(viewsets.ModelViewSet):
                 
                 return Response(response,status=status.HTTP_404_NOT_FOUND)
             
-            password = request.data["password"]
+            password = serializers.validated_data["password"]
             user.password = password
             user.save()
             
@@ -307,10 +308,11 @@ class SignUpViewSet(viewsets.ModelViewSet):
                     "userId": user.pk,
                     "username": user.username,
                     "email": user.email,
+                    "admin": user.is_superuser
                 },
             }
             
-            template = TemplateEmail(
+            """template = TemplateEmail(
                 app_name="accounts",
                 to=serializer.validated_data["email"],
                 from_email=settings.EMAIL_HOST_USER,
@@ -321,7 +323,7 @@ class SignUpViewSet(viewsets.ModelViewSet):
             
             
             template.start()
-            template.join()
+            template.join() """
             
             return Response(response, status=status.HTTP_200_OK)
         

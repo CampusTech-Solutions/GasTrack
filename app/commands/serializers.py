@@ -2,10 +2,10 @@ from rest_framework import serializers
 from .models import *
 from accounts.serializers import ClientSerializer
 
-class BasketSerializer(serializers.ModelSerializer):
+class CartSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = Basket
+        model = Cart
         fields = ["client", "gasStore"]
 
 
@@ -14,7 +14,7 @@ class CommandSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Command
-        fields = ["gasBottle", "basket", "bottleNumber"]
+        fields = ["gasBottle", "cart", "bottleNumber"]
 
 
 class PayCommandSerializer(serializers.ModelSerializer):

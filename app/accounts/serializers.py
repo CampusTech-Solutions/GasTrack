@@ -104,6 +104,7 @@ class GestStoreSignUpSerializer(SignUpSerializer):
 class PasswordResetSerializer(serializers.ModelSerializer):
     username = serializers.CharField()
     email = serializers.EmailField()
+    code = ""
     class Meta:
         model = Client
         fields = ["username","email"]
@@ -111,11 +112,12 @@ class PasswordResetSerializer(serializers.ModelSerializer):
         
     def create(self, validated_data):
         
-        code = generate_code(4)+"-"+generate_code(4)
+        code = generate_code(4)+generate_code(4)
         print(validated_data)
+        self.code = code
         print(f"code = {code}")
         user = self.Meta.model.objects.get(**validated_data)
-       
+        
         
         user.code = code
         

@@ -6,10 +6,10 @@ from django.conf import settings
 from rest_framework.permissions import IsAuthenticated
 
 
-class BasketViewSet(viewsets.ModelViewSet):
+class CartViewSet(viewsets.ModelViewSet):
 
-    queryset = Basket.objects.all()
-    serializer_class = BasketSerializer
+    queryset = Cart.objects.all()
+    serializer_class = CartSerializer
     permission_classes = [IsAuthenticated]
 
 

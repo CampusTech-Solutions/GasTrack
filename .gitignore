@@ -1,8 +1,9 @@
 app/*/migrations/
 app/db.sqlite3
+app/static
 app/*/__pycache__/
 env/
-app/geoip/
-app/static/
+static/
 business_*
 production*
+

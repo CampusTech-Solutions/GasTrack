@@ -7,19 +7,17 @@ app_name = "accounts"
 router = routers.DefaultRouter()
 
 router.register(r'clients', ClientViewSet)
-router.register(r'admins', AdminViewSet)
-router.register(r'geststores', GestStoreViewSet)
+router.register(r'admins', AdminViewSet,basename='admin')
+router.register(r'geststores', GestStoreViewSet,basename='geststore')
+router.register(r'login', LoginViewSet,basename='login')
+router.register(r'password-reset',PasswordResetViewSet,basename='password-reset')
+router.register(r'password-reset-success',ResetViewSet,basename='password-reset-success')
+router.register(r'admin/login', AdminLoginViewSet,basename='admin-login')
+router.register(r'geststore/login', GestStoreLoginViewSet,basename='geststore-login')
 
-
-router.register(r'client/login', LoginViewSet)
-router.register(r'password-reset',PasswordResetViewSet)
-router.register(r'password-reset-success',ResetViewSet)
-router.register(r'admin/login', AdminLoginViewSet)
-router.register(r'geststore/login', GestStoreLoginViewSet)
-
-router.register(r'client/signup', SignUpViewSet)
-router.register(r'admin/signup', AdminSignUpViewSet)
-router.register(r'geststore/signup', GestStoreSignUpViewSet)
+router.register(r'signup', SignUpViewSet,basename='signup')
+router.register(r'admin/signup', AdminSignUpViewSet,basename='admin-signup')
+router.register(r'geststore/signup', GestStoreSignUpViewSet,basename='geststore-signup')
 
 urlpatterns = router.urls
 

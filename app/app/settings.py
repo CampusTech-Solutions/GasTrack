@@ -66,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'app.urls'
@@ -93,7 +94,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [("127.0.0.1", 6379),],
+            "hosts": [("redis", 6379),],
         },
     },
 }
@@ -107,7 +108,7 @@ DATABASES = {
         'NAME': 'gaztrack',
         'USER': 'gaztrack',
         'PASSWORD': 'postgres',
-        'HOST': '127.0.0.1',
+        'HOST': 'db',
         'PORT': '5432',
     },
     #'Datawarehouse':{
@@ -171,14 +172,20 @@ USE_L10N = True
 
 USE_TZ = True
 
-#CORS_ALLOWED_ORIGINS = [
-#    'http://192.168.112.16',
-#]
+CORS_ALLOWED_ORIGINS = [
+#    'http://localhost:8000',
+#    'http://127.0.0.1:8000',
+#    'http://localhost',
+    'http://192.168.198.217',
+#    'http://0.0.0.0'
+]
 #
-#CSRF_TRUSTED_ORIGINS = [
-#    'http://127.0.0.1',
-#    
-#]
+CSRF_TRUSTED_ORIGINS = [
+#    'http://localhost:8000'
+    'http://127.0.0.1',
+    'http://192.168.198.217',
+#    'http://localhost',
+]
 
 CORS_ORIGIN_ALLOW_ALL = True
 CSRF_ORIGIN_ALLOW_ALL = True
@@ -198,8 +205,8 @@ AUTH_USER_MODEL = "accounts.Client"
 
 STATIC_URL = '/static/'
 STATIC_ROOT =  os.path.join(BASE_DIR, 'static')
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'ressources')
+MEDIA_URL = '/ressources/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -221,5 +228,6 @@ LEAFLET_CONFIG = {
     "ATTRIBUTION_PREFIX": "Gaztrack API",
 }
 
-MEDIA_URL = 'resources/'
-MEDIA_ROOT = 'resources/'
+CLIENT_URL = '/client/'
+CLIENT_ROOT =  os.path.join(BASE_DIR, 'client')
+
