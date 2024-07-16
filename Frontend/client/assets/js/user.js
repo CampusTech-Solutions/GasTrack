@@ -142,7 +142,7 @@ class User {
         let latlng = markerU.getLatLng();
         data["location"]["coordinates"] = [latlng.lat, latlng.lng];
         let user = this;
-        let url = 'https://' + web_url + '/accounts/clients/' + id + '/';
+        let url = 'http://' + web_url + '/accounts/clients/' + id + '/';
         $.ajax({
             url: url,
             type: "PATCH",
