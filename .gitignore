@@ -3,3 +3,6 @@ app/db.sqlite3
 app/*/__pycache__/
 env/
 app/geoip/
+app/static/
+business_*
+production*
