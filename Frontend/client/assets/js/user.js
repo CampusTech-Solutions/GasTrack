@@ -69,7 +69,7 @@ class User {
         data["email"] = email;
         let href = window.location.href;
         $.ajax({
-            url: `https://${web_url}/accounts/password-reset/`,
+            url: `http://${web_url}/accounts/password-reset/`,
             type: "POST",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(data),
@@ -84,7 +84,7 @@ class User {
                     e.preventDefault();
                     alert("OK!");
                     let coder = this.getCode().trim();
-                    if (coder.length == 8 && href == `https://${web_url}/reset-password.html`) {
+                    if (coder.length == 8 && href == `http://${web_url}/reset-password.html`) {
                         if (coder == data.code) {
                             alert("pass");
                             $('#password-container').empty();
@@ -101,7 +101,7 @@ class User {
                                 val["password"] = $('#new-pass').val();
                                 if (val["password"] != "") {
                                     $.ajax({
-                                        url: `https://${web_url}/accounts/password-reset-success/`,
+                                        url: `http://${web_url}/accounts/password-reset-success/`,
                                         type: "POST",
                                         dataType: "json",
                                         contentType: "application/json; charset=utf-8",
@@ -114,7 +114,7 @@ class User {
                                         success: (data) => {
                                             console.log(data);
                                             alert("Mot de passe reinitialiser avec success !!");
-                                            window.location.href = `https://${web_url}/profil.html`;
+                                            window.location.href = `http://${web_url}/profil.html`;
                                         },
                                         error: (error) => {
                                             console.log(error);
@@ -174,7 +174,7 @@ class User {
             });
             console.log({ "Données": data });
             $.ajax({
-                url: `https://${web_url}/accounts/login/`,
+                url: `http://${web_url}/accounts/login/`,
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 data: data,
@@ -216,7 +216,7 @@ class User {
             });
             console.log({ "Données": data });
             $.ajax({
-                url: `https://${web_url}/accounts/signup/`,
+                url: `http://${web_url}/accounts/signup/`,
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 data: data,
@@ -249,7 +249,7 @@ class User {
         let chatThis = this;
         console.log("Fetching messages...");
         $.ajax({
-            url: `https://${web_url}/accounts/clients/${chatThis.id}/`,
+            url: `http://${web_url}/accounts/clients/${chatThis.id}/`,
             type: "GET",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
@@ -281,7 +281,7 @@ let email = window.localStorage.getItem("Email");
 let user = new User(id, username, email, null, null, null);
 user.fetchUser();
 $('#update-info').on('click', user.update);
-if (location.href == `https://${web_url}/reset-password.html`) {
+if (location.href == `http://${web_url}/reset-password.html`) {
     setTimeout(() => {
         user.passwordReset();
     }, 200);
