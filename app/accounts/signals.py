@@ -17,3 +17,9 @@ def create_gest_auth_token(sender, instance=None, created=False, **kwargs):
     
     if created:
         Token.objects.create(user=instance)
+
+@receiver(post_save, sender=Admin)
+def create_admin_auth_token(sender, instance=None, created=False, **kwargs):
+    
+    if created:
+        Token.objects.create(user=instance)

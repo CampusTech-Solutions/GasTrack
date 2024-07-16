@@ -172,19 +172,19 @@ USE_L10N = True
 
 USE_TZ = True
 
-CORS_ALLOWED_ORIGINS = [
-#    'http://localhost:8000',
+#CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:8000',
 #    'http://127.0.0.1:8000',
 #    'http://localhost',
-    'http://192.168.198.217',
+#    'http://192.168.198.217',
 #    'http://0.0.0.0'
-]
+#]
 #
 CSRF_TRUSTED_ORIGINS = [
 #    'http://localhost:8000'
-    'http://127.0.0.1',
-    'http://192.168.198.217',
-#    'http://localhost',
+#    'http://127.0.0.1',
+#    'http://192.168.198.217',
+    'http://localhost',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True

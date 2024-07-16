@@ -1,6 +1,8 @@
 /* URL */
-const web_url = location.host;
+const web_url = location.host + "/api";
 let datas = JSON.parse(window.localStorage.getItem("client-datas"));
+
+declare var $: any;
 
 /**************************************************************************/
 /* LES ENTITES */
@@ -140,11 +142,13 @@ function getCookie(name):string {
     }
     return cookieValue;
   
-  }
+}
 
 /* Controleur du dépôt */
 class GesStoreManager implements WritingManager, ReadingManager
 {
+    public user_token = JSON.parse(window.localStorage.getItem("user"))["token"];
+    
     public create(gesStore:GesStore) {
         $.ajax({
             url: `http://${web_url}/accounts/geststore/signup/`,
@@ -163,7 +167,7 @@ class GesStoreManager implements WritingManager, ReadingManager
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 "X-Requested-With": "XMLHttpRequest",
-                //Authorization: "Token " + window.localStorage.getItem("Token"),
+                "Authorization": "Token " + this.user_token,
                 'Access-Control-Allow-Origin': '*',
                 "X-CSRFToken": getCookie("csrftoken"), // don't forget to include the 'getCookie' function
                 "vary": "Origin",
@@ -187,7 +191,7 @@ class GesStoreManager implements WritingManager, ReadingManager
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 "X-Requested-With": "XMLHttpRequest",
-                //Authorization: "Token " + window.localStorage.getItem("Token"),
+                "Authorization": "Token " + this.user_token,
                 'Access-Control-Allow-Origin': '*',
                 "X-CSRFToken": getCookie("csrftoken"), // don't forget to include the 'getCookie' function
                 "vary": "Origin",
@@ -213,6 +217,7 @@ class GesStoreManager implements WritingManager, ReadingManager
             contentType: "application/json; charset=utf-8",
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
+                "Authorization": "Token " + this.user_token,
                 "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
                 "access-control-allow-origin" : "*",
                 "vary" : "Origin",
@@ -231,11 +236,13 @@ class GesStoreManager implements WritingManager, ReadingManager
 /* Controleur du depôt de gaz */
 class GasStoreManager implements WritingManager, ReadingManager
 {
+    public user_token = JSON.parse(window.localStorage.getItem("user"))["token"];
+
     public create(gasStore:GasStore) {
 
         var formData = new FormData();
         formData.append("name", gasStore.name);
-        formData.append("manager", gasStore.gesStore.id);
+        formData.append("manager", gasStore.gesStore?.id);
         formData.append("location", gasStore.location);
         formData.append("image", gasStore.image);
 
@@ -247,7 +254,7 @@ class GasStoreManager implements WritingManager, ReadingManager
             data: formData,
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
-                //Authorization: "Token " + window.localStorage.getItem("Token"),
+                "Authorization": "Token " + this.user_token,
                 'Access-Control-Allow-Origin': '*',
                 "X-CSRFToken": getCookie("csrftoken"), // don't forget to include the 'getCookie' function
                 "vary": "Origin",
@@ -271,7 +278,7 @@ class GasStoreManager implements WritingManager, ReadingManager
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 "X-Requested-With": "XMLHttpRequest",
-                //Authorization: "Token " + window.localStorage.getItem("Token"),
+                "Authorization": "Token " + this.user_token,
                 'Access-Control-Allow-Origin': '*',
                 "X-CSRFToken": getCookie("csrftoken"), // don't forget to include the 'getCookie' function
                 "vary": "Origin",
@@ -297,6 +304,7 @@ class GasStoreManager implements WritingManager, ReadingManager
             contentType: "application/json; charset=utf-8",
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
+                "Authorization": "Token " + this.user_token,
                 "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
                 "access-control-allow-origin" : "*",
                 "vary" : "Origin",
@@ -313,7 +321,9 @@ class GasStoreManager implements WritingManager, ReadingManager
 
 /* Controleur du client */
 class ClientManager implements WritingManager, ReadingManager
-{
+{    
+    public user_token = JSON.parse(window.localStorage.getItem("user"))["token"];
+
     public create(gesStore:GesStore) {
         //...
     }
@@ -326,7 +336,7 @@ class ClientManager implements WritingManager, ReadingManager
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 "X-Requested-With": "XMLHttpRequest",
-                //Authorization: "Token " + window.localStorage.getItem("Token"),
+                "Authorization": "Token " + this.user_token,
                 'Access-Control-Allow-Origin': '*',
                 "X-CSRFToken": getCookie("csrftoken"), // don't forget to include the 'getCookie' function
                 "vary": "Origin",
@@ -352,6 +362,7 @@ class ClientManager implements WritingManager, ReadingManager
             contentType: "application/json; charset=utf-8",
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
+                "Authorization": "Token " + this.user_token,
                 "X-CSRFToken": getCookie("csrftoken"),  // don't forget to include the 'getCookie' function
                 "access-control-allow-origin" : "*",
                 "vary" : "Origin",
@@ -369,7 +380,9 @@ class ClientManager implements WritingManager, ReadingManager
 
 /* Controleur de l'admin */
 class AdminManager implements EditManager
-{
+{    
+    public user_token = JSON.parse(window.localStorage.getItem("user"))["token"];
+
     public update(admin:Admin) {
         $.ajax({
             url: `http://${web_url}/accounts/admins/${admin.id}`,
@@ -387,7 +400,7 @@ class AdminManager implements EditManager
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 "X-Requested-With": "XMLHttpRequest",
-                //Authorization: "Token " + window.localStorage.getItem("Token"),
+                "Authorization": "Token " + this.user_token,
                 'Access-Control-Allow-Origin': '*',
                 "X-CSRFToken": getCookie("csrftoken"), // don't forget to include the 'getCookie' function
                 "vary": "Origin",
@@ -518,10 +531,13 @@ var min = 0, max = 3;
 function getMaxId()
 {
     let max = 0;
-    for(let i = 0; i < datas.length; i++)
+    if(datas != null)
     {
-        let dt = datas[i];
-        if(dt.id > max) max = dt.id;
+        for(let i = 0; i < datas.length; i++)
+        {
+            let dt = datas[i];
+            if(dt.id > max) max = dt.id;
+        }
     }
     return max;
 }

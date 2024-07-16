@@ -181,19 +181,34 @@
                   </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
-                  <h6 class="p-3 mb-0">Profile</h6>
+                  <h6 class="p-3 mb-0">Profil</h6>
                   <div class="dropdown-divider"></div>
                   
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-logout text-danger"></i>
+                  <div class="no-auth">
+                    <a class="open-login-form dropdown-item preview-item">
+                      <div class="preview-thumbnail">
+                        <div class="preview-icon bg-dark rounded-circle">
+                          <i class="mdi mdi-login text-success"></i>
+                        </div>
                       </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Déconnexion</p>
-                    </div>
-                  </a>
+                      <div class="preview-item-content">
+                        <p class="preview-subject mb-1">Connexion</p>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="auth">
+                    <a class="dropdown-item preview-item" id="logout-btn">
+                      <div class="preview-thumbnail">
+                        <div class="preview-icon bg-dark rounded-circle">
+                          <i class="mdi mdi-logout text-danger"></i>
+                        </div>
+                      </div>
+                      <div class="preview-item-content">
+                        <p class="preview-subject mb-1">Déconnexion</p>
+                      </div>
+                    </a>
+                  </div>
     
                 </div>
               </li>
@@ -401,6 +416,9 @@
     <script src="assets/js/dashboard.js"></script>
     <script src="assets/js/typeahead.js"></script>
     <script src="assets/js/select2.js"></script>
+
+    <script src="assets/js/scripts/own-main.js"></script>
+    <script type="module" src="assets/js/scripts/login-manager.js"></script>
     <!-- End custom js for this page -->
   </body>
 </html>

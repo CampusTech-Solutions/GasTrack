@@ -1,5 +1,5 @@
 /* URL */
-var web_url = location.host;
+var web_url = location.host + ":8000/api";
 var datas = JSON.parse(window.localStorage.getItem("client-datas"));
 /**************************************************************************/
 /* LES ENTITES */
@@ -168,8 +168,7 @@ var GasStoreManager = /** @class */ (function () {
         formData.append("name", gasStore.name);
         formData.append("manager", gasStore.gesStore.id);
         formData.append("location", gasStore.location);
-        formData.append("image", gasStore.image.value);
-        console.log({"form Data" : formData});
+        formData.append("image", gasStore.image);
         $.ajax({
             url: "http://".concat(web_url, "/gasmanagement/gasstore/new/"),
             type: "POST",
@@ -384,10 +383,12 @@ var min = 0, max = 3;
 // **************************** GESTIONNAIRES DE DEPOT ***************************************
 function getMaxId() {
     var max = 0;
-    for (var i = 0; i < datas.length; i++) {
-        var dt = datas[i];
-        if (dt.id > max)
-            max = dt.id;
+    if (datas != null) {
+        for (var i = 0; i < datas.length; i++) {
+            var dt = datas[i];
+            if (dt.id > max)
+                max = dt.id;
+        }
     }
     return max;
 }
@@ -534,8 +535,7 @@ function createGasStore() {
                 break;
             }
         }
-        console.log({"form": form});
-        var gasStore = new GasStore(form["name"].value, currentGesStore, location, form["image"]);
+        var gasStore = new GasStore(form["name"].value, currentGesStore, location, form["image"].value);
         gasStoreManager.create(gasStore);
         setTimeout(function () {
             loadGasStores();
