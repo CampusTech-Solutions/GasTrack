@@ -4,5 +4,6 @@ app/static
 app/*/__pycache__/
 env/
 static/
-
+business_*
+production*
 
