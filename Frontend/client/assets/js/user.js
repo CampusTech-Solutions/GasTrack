@@ -69,12 +69,12 @@ class User {
         data["email"] = email;
         let href = window.location.href;
         $.ajax({
-            url: `http://${web_url}/accounts/password-reset/`,
+            url: `https://${web_url}/accounts/password-reset/`,
             type: "POST",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(data),
             headers: {
-                "X-Requested-With": "XMLHttpRequest",
+                "X-Requested-With": "XMLHttpsRequest",
                 //"Authorization": "Token " + window.localStorage.getItem("Token"),
                 "X-CSRFToken": getCookie("csrftoken"), // don't forget to include the 'getCookie' function
             },
@@ -84,7 +84,7 @@ class User {
                     e.preventDefault();
                     alert("OK!");
                     let coder = this.getCode().trim();
-                    if (coder.length == 8 && href == `http://${web_url}/reset-password.html`) {
+                    if (coder.length == 8 && href == `https://${web_url}/reset-password.html`) {
                         if (coder == data.code) {
                             alert("pass");
                             $('#password-container').empty();
@@ -101,20 +101,20 @@ class User {
                                 val["password"] = $('#new-pass').val();
                                 if (val["password"] != "") {
                                     $.ajax({
-                                        url: `http://${web_url}/accounts/password-reset-success/`,
+                                        url: `https://${web_url}/accounts/password-reset-success/`,
                                         type: "POST",
                                         dataType: "json",
                                         contentType: "application/json; charset=utf-8",
                                         data: JSON.stringify(val),
                                         headers: {
-                                            "X-Requested-With": "XMLHttpRequest",
+                                            "X-Requested-With": "XMLHttpsRequest",
                                             //"Authorization": "Token " + window.localStorage.getItem("Token"),
                                             "X-CSRFToken": getCookie("csrftoken"), // don't forget to include the 'getCookie' function
                                         },
                                         success: (data) => {
                                             console.log(data);
                                             alert("Mot de passe reinitialiser avec success !!");
-                                            window.location.href = `http://${web_url}/profil.html`;
+                                            window.location.href = `https://${web_url}/profil.html`;
                                         },
                                         error: (error) => {
                                             console.log(error);
@@ -142,7 +142,7 @@ class User {
         let latlng = markerU.getLatLng();
         data["location"]["coordinates"] = [latlng.lat, latlng.lng];
         let user = this;
-        let url = 'http://' + web_url + '/accounts/clients/' + id + '/';
+        let url = 'https://' + web_url + '/accounts/clients/' + id + '/';
         $.ajax({
             url: url,
             type: "PATCH",
@@ -150,7 +150,7 @@ class User {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(data),
             headers: {
-                "X-Requested-With": "XMLHttpRequest",
+                "X-Requested-With": "XMLHttpsRequest",
                 "Authorization": "Token " + window.localStorage.getItem("Token"),
                 "X-CSRFToken": getCookie("csrftoken"), // don't forget to include the 'getCookie' function
             },
@@ -174,12 +174,12 @@ class User {
             });
             console.log({ "Données": data });
             $.ajax({
-                url: `http://${web_url}/accounts/login/`,
+                url: `https://${web_url}/accounts/login/`,
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 data: data,
                 headers: {
-                    "X-Requested-With": "XMLHttpRequest",
+                    "X-Requested-With": "XMLHttpsRequest",
                     "X-CSRFToken": getCookie("csrftoken"),
                     "access-control-allow-origin": "*",
                     "vary": "Origin",
@@ -216,12 +216,12 @@ class User {
             });
             console.log({ "Données": data });
             $.ajax({
-                url: `http://${web_url}/accounts/signup/`,
+                url: `https://${web_url}/accounts/signup/`,
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 data: data,
                 headers: {
-                    "X-Requested-With": "XMLHttpRequest",
+                    "X-Requested-With": "XMLHttpsRequest",
                     "X-CSRFToken": getCookie("csrftoken"),
                     "access-control-allow-origin": "*",
                     "vary": "Origin",
@@ -249,12 +249,12 @@ class User {
         let chatThis = this;
         console.log("Fetching messages...");
         $.ajax({
-            url: `http://${web_url}/accounts/clients/${chatThis.id}/`,
+            url: `https://${web_url}/accounts/clients/${chatThis.id}/`,
             type: "GET",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             headers: {
-                "X-Requested-With": "XMLHttpRequest",
+                "X-Requested-With": "XMLHttpsRequest",
                 "Authorization": "Token " + window.localStorage.getItem("Token"),
                 "X-CSRFToken": getCookie("csrftoken"), // don't forget to include the 'getCookie' function
             },
@@ -281,7 +281,7 @@ let email = window.localStorage.getItem("Email");
 let user = new User(id, username, email, null, null, null);
 user.fetchUser();
 $('#update-info').on('click', user.update);
-if (location.href == `http://${web_url}/reset-password.html`) {
+if (location.href == `https://${web_url}/reset-password.html`) {
     setTimeout(() => {
         user.passwordReset();
     }, 200);
