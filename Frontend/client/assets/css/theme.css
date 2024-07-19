@@ -1212,21 +1212,6 @@ a.text-dark:hover, a.text-dark:focus {
 
 
 
-
-@media (min-width: 768px) {
-  .card-service {
-    width: 1000px;
-  }
-}
-
-
-
-.main-form {
-  display: block;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
 .banner-home {
   padding: 0;
   background-color: #FEC836;
