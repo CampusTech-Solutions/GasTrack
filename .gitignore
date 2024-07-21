@@ -3,9 +3,15 @@ app/db.sqlite3
 app/static
 app/*/__pycache__/
 env/
+<<<<<<< HEAD
 venv/
 app/geoip/
 static/
 Frontend/GasStoreDashboard
 Frontend/admin/assets/ts
+=======
+static/
+business_*
+production*
+>>>>>>> origin/scm24
 

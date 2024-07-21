@@ -84,4 +84,4 @@ class Depot {
         });
     }
 }
-Depot.fetchDepots(`http://${web_url}/gasmanagement/gasstore`);
+Depot.fetchDepots(`https://${web_url}/gasmanagement/gasstore`);
