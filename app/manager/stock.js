@@ -4,15 +4,6 @@ window.addEventListener("load", function (e) {
     var table = [];
     var card1 = new SettingCard("Stock", "Nouveau Stock", "Créer Un Nouveau Stock Dans Votre Dépôt", "icon-lg mdi mdi-plus text-success ms-auto");
     card1.render();
-    // table.push(card1);
-    // var card2 = new SettingCard(
-    //     "Stock", 
-    //     "Mise à Jour", 
-    //     "Mettez à jour un stock existant dans votre Dépôt",
-    //     "icon-lg mdi mdi-update text-secondary ms-auto"
-    // );
-    // card2.render();
-    // table.push(card2);
     var card3 = new SettingCard("Achats", "Nouvel Achat", "Avez-vous fait un nouvel achat ? Enregistrez-le", "icon-lg mdi mdi-door-open text-primary ms-auto");
     card3.render();
     // table.push(card3);
@@ -666,26 +657,3 @@ entries_socket.onmessage = function (message) {
 sales_socket.onmessage = function (message) {
     console.log(message);
 };
-// window.addEventListener('DOMContentLoaded', ()=>{
-//   var update_icons = document.querySelectorAll('.sub-infos i');
-//   var manager_data = document.querySelectorAll('.manager-data');
-//   var submit_button:any = document.querySelector('.info-validate-button button');
-// manager_data.forEach(element => {
-//   element.addEventListener('change', ()=>{
-//     submit_button.style.backgroundColor = "rgb(0, 255, 26)";
-//     submit_button.style.color = "#12151e";
-//   });
-// });
-// for (var element of update_icons) {
-//   element.addEventListener('click', ()=>{
-//     var new_value = window.prompt("Nouvelle Valeur:")
-//     element.textContent = new_value;
-//   });
-// };
-// submit_button.addEventListener("click", function(){
-//   var data_array = new Array();
-//   manager_data.forEach(element => {
-//     data_array.push(element.textContent)
-//   });
-//   console.log(data_array);
-// });});
