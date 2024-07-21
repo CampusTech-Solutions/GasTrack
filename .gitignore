@@ -4,6 +4,7 @@ app/static
 app/*/__pycache__/
 env/
 <<<<<<< HEAD
+<<<<<<< HEAD
 venv/
 app/geoip/
 static/
@@ -14,4 +15,14 @@ static/
 business_*
 production*
 >>>>>>> origin/scm24
+=======
+static/
+business_*
+production*
+venv/
+app/geoip/
+static/
+
+
+>>>>>>> origin/yvesprogrammeur
 

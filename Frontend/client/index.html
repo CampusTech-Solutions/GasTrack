@@ -9,6 +9,10 @@
 
   <title>Acceuil-GazTrack</title>
 
+  <!-- bootstrap icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  
   <link rel="stylesheet" href="assets/css/maicons.css">
   <link rel="stylesheet" href="assets/css/bootstrap.css">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -19,7 +23,7 @@
   <link rel="stylesheet" href="assets/vendor/animate/animate.css">
 
   <link rel="stylesheet" href="assets/css/theme.css">
-  <link rel="stylesheet" href="assets/css/account.css">
+  
 </head>
 <body>
 
@@ -33,17 +37,17 @@
           <div class="col-sm-8 text-sm">
             <div class="site-info">
               
-              <a href="#"><span class="mx-3 text-black-50">Service client</span><span class="mai-call" style="color: #F99D2C;"></span> +237 777777777</a>
-              <span class="divider">|</span>
-              <a href="#"><span class="mai-mail" style="color: #F99D2C;"></span>campustechsolution237@gmail.com</a>
+              <a href="#"><span class="mx-3 text-black-50">Service client</span><i class="bi bi-telephone-fill mx-2" style="color: #F99D2C;" ></i> +237 777777777</a>
+              
+              <a href="#"><i class="bi bi-envelope-fill mx-3" style="color: #F99D2C;" ></i></span>campustechsolution237@gmail.com</a>
             </div>
           </div>
           <div class="col-sm-4 text-right text-sm">
             <div class="social-mini-button">
-              <a href="#"><span class="mai-logo-facebook-f"></span></a>
-              <a href="#"><span class="mai-logo-twitter"></span></a>
-              <a href="#"><span class="mai-logo-dribbble"></span></a>
-              <a href="#"><span class="mai-logo-instagram"></span></a>
+              <a href="#"><i class="bi bi-facebook" ></i></a>
+              <a href="#"><i class="bi bi-twitter" ></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+              <a href="#"><i class="bi bi-instagram"></i></a>
             </div>
           </div>
         </div> <!-- .row -->
@@ -67,7 +71,7 @@
               <a class="nav-link" href="#">A Propos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link" href="contact.html">Contact</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -95,40 +99,39 @@
     </nav>
   </header>
   
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12">
-        <div id="carouselExample" class="carousel slide">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="assets/img/banner.png" class="d-block w-100" style="height: 700px;" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="assets/img/banner.png" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-              <img src="assets/img/banner.png" class="d-block w-100" alt="...">
-            </div>
-          </div>
-          <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button> -->
-        </div>
+
+  <div id="carouselExampleIndicators" class="carousel slide">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="assets/img/banner.png" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="assets/img/banner.png" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="assets/img/banner.png" class="d-block w-100" alt="...">
       </div>
     </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
- 
 
   <div class="bg-light">
-    <div class="page-section py-3 mt-md-n5 custom-index">
+    <div class="page-section py-2 mt-md-n5 custom-index">
       <div class="container">
         <div class="row ">
-          <div class="col-12 py-3 py-sm-0">
+          <div class="col-12 py-2 py-sm-0">
             <div class="card-service ">
               <form action="#" class="form-search d-flex align-items-stretch mb-2" >
                 <input type="text" class="form-control" placeholder="example. Tradex">
@@ -153,7 +156,7 @@
               <img src="assets/img/b1.png" alt="">
             </div>
             <div class="body">
-              <p class="text-xl mb-0">Total</p>
+              <p class="text-xl mb-0 mx-3 ">Total</p>
       <div class="text-center">
         <a type="button" role="button" href="depot.html?gaz=total" class="btn btn-primary m-4 px-1" >Trouver Le Depot</a>
 
@@ -167,7 +170,7 @@
               <img src="assets/img/b2.png" alt="">
             </div>
             <div class="body">
-              <p class="text-xl mb-0">Tradex</p><div class="text-center">
+              <p class="text-xl mb-0 mx-3 ">Tradex</p><div class="text-center">
                 <a type="button" role="button" href="depot.html?gaz=tradex" class="btn btn-primary m-4 px-1" >Trouver Le Depot</a>
 
               </div>
@@ -180,7 +183,7 @@
               <img src="assets/img/b3.png" alt="">
             </div>
             <div class="body">
-              <p class="text-xl mb-0">Green Oil</p>
+              <p class="text-xl mb-0 mx-3 ">Green Oil</p>
               <div class="text-center">
                 <a type="button" role="button" href="depot.html?gaz=green-oil" class="btn btn-primary m-4 px-1" >Trouver Le Depot</a>
 
@@ -188,13 +191,15 @@
             </div>
           </div>
         </div>
-        <div class="item">
-          <div class="card-doctor">
-            <div class="header">
+
+
+        <div class="item mx-3">
+          <div class="card-doctor mx-3">
+            <div class="header ">
               <img src="assets/img/b4.png" alt="">
             </div>
             <div class="body">
-              <p class="text-xl mb-0">Ola </p>
+              <p class="text-xl mb-0 mx-3">Ola </p>
               <div class="text-center">
                 <a type="button" role="button" href="depot.html?gaz=ola" class="btn btn-primary m-4 px-1" >Trouver Le Depot</a>
 
@@ -202,19 +207,25 @@
             </div>
           </div>
         </div>
+
+
         <div class="item">
+
           <div class="card-doctor">
             <div class="header">
               <img src="assets/img/b5.png" alt="">
             </div>
             <div class="body">
-              <p class="text-xl mb-0">Star </p>
+              <p class="text-xl mb-0 mx-3">Star </p>
               <div class="text-center">
                 <a type="button" role="button" href="depot.html?gaz=star" class="btn btn-primary m-4 px-1" >Trouver Le Depot</a>
 
               </div>
             </div>
           </div>
+
+
+          
         </div>
       </div>
     </div>
@@ -304,18 +315,20 @@
     <div class="container py-5 py-lg-0">
       <div class="row align-items-center">
         <div class="col-lg-4 wow zoomIn">
-          <div class="img-banner d-none d-lg-block">
-            <img src="assets/img/mobile_app.png" alt="">
+          <div class="img-banner">
+            <img src="assets/img/mobile_app.png" class="img-fluid" alt="...">
+          
           </div>
         </div>
         <div class="col-lg-8 wow fadeInRight">
           <h1 class="font-weight-normal mb-3">Utilisez notre application pour accéder à davantage de fonctionnalités de GasTrack</h1>
-          <a href="#"><img src="assets/img/google_play.svg" alt=""></a>
-          <a href="#" class="ml-2"><img src="assets/img/app_store.svg" alt=""></a>
+          <a href="#" class="ml-1"><img src="assets/img/google_play.svg" alt=""></a>
+          <a href="#" class="ml-1"><img src="assets/img/app_store.svg" alt=""></a>
         </div>
       </div>
     </div>
-  </div> <!-- .banner-home -->
+  </div>
+   <!-- .banner-home -->
 
  <!-- ======= Footer ======= -->
  <footer id="footer">
