@@ -149,6 +149,16 @@
     display: none;
 }
 
+input:focus
+{
+    color: whitesmoke !important;
+}
+
+input:not(:focus)
+{
+    color: rgba(245, 245, 245, 0.575);
+}
+
 @media all and (max-width: 768px)
 {
     #login-form-container

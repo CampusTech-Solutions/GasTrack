@@ -50,23 +50,27 @@ function getCookie(name) {
     return cookieValue;
 }
 /* Controleur du depôt de gaz */
+let ldFormData = null;
 var GasStoreManager = /** @class */ (function () {
     function GasStoreManager() {
         this.user_token = JSON.parse(window.localStorage.getItem("user"))["token"];
     }
+    //GasStoreManager.prototype.create = function (gasStore) {
     GasStoreManager.prototype.create = function (gasStore) {
         var _a;
-        var formData = new FormData();
-        formData.append("name", gasStore.name);
-        formData.append("manager", (_a = gasStore.gesStore) === null || _a === void 0 ? void 0 : _a.id);
-        formData.append("location", gasStore.location);
-        formData.append("image", gasStore.image);
+        $("#interm-name").val(gasStore.name);
+        $("#interm-manager").val((_a = gasStore.gesStore) === null || _a === void 0 ? void 0 : _a.id);
+        $("#interm-location").val(gasStore.location);
+
+        let interm_form = $("#interm-form")[0];
+        ldFormData = new FormData(interm_form);
+        ldFormData.append("image", gasStore.image);
         $.ajax({
             url: "http://".concat(web_url, "/gasmanagement/gasstore/new/"),
             type: "POST",
             processData: false,
             contentType: false,
-            data: formData,
+            data: ldFormData,
             headers: {
                 "X-Requested-With": "XMLHttpRequest",
                 "Authorization": "Token " + this.user_token,
