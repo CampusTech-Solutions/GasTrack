@@ -109,7 +109,7 @@ DATABASES = {
         'NAME': 'gaztrack',
         'USER': 'gaztrack',
         'PASSWORD': 'postgres',
-        'HOST': 'db',
+        'HOST': 'localhost',
         'PORT': '5432',
     },
     'storedashboard':{
